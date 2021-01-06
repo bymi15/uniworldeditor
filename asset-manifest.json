@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/uniworldeditor/static/js/main.f8ad44fc.chunk.js",
+    "main.js.map": "/uniworldeditor/static/js/main.f8ad44fc.chunk.js.map",
+    "runtime-main.js": "/uniworldeditor/static/js/runtime-main.fb4d93f2.js",
+    "runtime-main.js.map": "/uniworldeditor/static/js/runtime-main.fb4d93f2.js.map",
+    "static/js/2.b0d234d5.chunk.js": "/uniworldeditor/static/js/2.b0d234d5.chunk.js",
+    "static/js/2.b0d234d5.chunk.js.map": "/uniworldeditor/static/js/2.b0d234d5.chunk.js.map",
+    "static/js/3.5e1c1b03.chunk.js": "/uniworldeditor/static/js/3.5e1c1b03.chunk.js",
+    "static/js/3.5e1c1b03.chunk.js.map": "/uniworldeditor/static/js/3.5e1c1b03.chunk.js.map",
+    "index.html": "/uniworldeditor/index.html",
+    "static/js/2.b0d234d5.chunk.js.LICENSE.txt": "/uniworldeditor/static/js/2.b0d234d5.chunk.js.LICENSE.txt",
+    "static/media/uniworldscreenshot.52053eda.png": "/uniworldeditor/static/media/uniworldscreenshot.52053eda.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fb4d93f2.js",
+    "static/js/2.b0d234d5.chunk.js",
+    "static/js/main.f8ad44fc.chunk.js"
+  ]
+}
