@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      background: "#1976d2",
     },
     title: {
       marginRight: theme.spacing(2),
@@ -28,6 +27,9 @@ const Navbar = () => {
         </Typography>
         <Button color="inherit" component={RouterLink} to="/">
           Home
+        </Button>
+        <Button color="inherit" component={RouterLink} to="/eventrooms">
+          Event Rooms
         </Button>
         <Button color="inherit" component={RouterLink} to="/about">
           About

@@ -7,6 +7,7 @@ const Layout = ({ children }) => (
     <CssBaseline />
     <Navbar />
     {children}
+    <div style={{ marginBottom: "50px" }} />
   </React.Fragment>
 );
 

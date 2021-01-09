@@ -1,5 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Avatar } from "@material-ui/core";
+import { isCorner, getTableIndex, getTableImage } from "../utils/tableUtils";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
@@ -31,35 +33,17 @@ const useStyles = makeStyles((theme) => ({
 const TableGrid = ({ tables }) => {
   const classes = useStyles();
 
-  const isCorner = (row, col) =>
-    (row === 0 && col === 0) ||
-    (row === 4 && col === 4) ||
-    (row === 4 && col === 0) ||
-    (row === 0 && col === 4);
-
-  const getTableIndex = (row, col) => {
-    for (let i = 0; i < tables.length; i++) {
-      // convert (-2 to 2 range) coordinates into (0 to 4 range) coordinates
-      const newX = Math.abs(tables[i].posX - 2);
-      const newY = Math.abs(tables[i].posY - 2);
-      if (newX === row && newY === col) {
-        return i;
-      }
-    }
-    return -1;
-  };
-
   const generateGridItems = () => {
     const gridItems = [];
     for (let row = 0; row < 5; row++) {
       for (let col = 0; col < 5; col++) {
-        const tableIndex = getTableIndex(row, col);
+        const tableIndex = getTableIndex(row, col, tables);
         if (isCorner(row, col)) {
           gridItems.push(<div className={classes.gridItemBlank}> </div>);
         } else if (tableIndex !== -1) {
           gridItems.push(
             <div id={tableIndex} className={classes.gridItem}>
-              x
+              <Avatar src={getTableImage(tables[tableIndex].type)} />
             </div>
           );
         } else {
@@ -73,8 +57,8 @@ const TableGrid = ({ tables }) => {
   return (
     <React.Fragment>
       <div className={classes.gridContainer}>
-        {generateGridItems().map((gridItem) => (
-          <React.Fragment>{gridItem}</React.Fragment>
+        {generateGridItems().map((gridItem, i) => (
+          <React.Fragment key={i}>{gridItem}</React.Fragment>
         ))}
       </div>
     </React.Fragment>
