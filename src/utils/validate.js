@@ -5,7 +5,6 @@ const validateEventRoom = (eventRoom) => {
     eventRoom.title &&
     eventRoom.scene &&
     eventRoom.background &&
-    eventRoom.host &&
     moment(eventRoom.eventDate).isValid() &&
     Array.isArray(eventRoom.meetingTables)
   );

@@ -20,6 +20,7 @@ import AddIcon from "@material-ui/icons/Add";
 import TableGrid from "../components/TableGrid";
 import EventRoomService from "../services/EventRoomService";
 import { Link as RouterLink } from "react-router-dom";
+import { platformURL } from "../config";
 
 const useStyles = makeStyles((theme) => ({
   mainSection: {
@@ -177,6 +178,17 @@ const EventRooms = (props) => {
                             ? eventRooms[currentEventRoom].background
                             : "None"}
                         </Typography>
+                        <div className={classes.divider} />
+                        <Typography variant="subtitle2">Event Room URL: </Typography>
+                        <a
+                          href={`${platformURL}?id=${eventRooms[currentEventRoom]._id}`}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
+                          <Typography variant="body2" noWrap>
+                            {platformURL}?id={eventRooms[currentEventRoom]._id}
+                          </Typography>
+                        </a>
                       </Grid>
                     </Grid>
                   </CardContent>

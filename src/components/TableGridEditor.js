@@ -23,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  gridItemFilled: {
-    background: "#fff",
-  },
-  gridItemBlank: {
+  gridItemFill: {
     background: "#ccc",
+    "&:hover": {
+      background: "#aaa",
+    },
   },
 }));
 
@@ -52,9 +52,9 @@ const TableGridEditor = ({ tables, updateMeetingTables }) => {
     updateMeetingTables([...(tables || {}), table]);
   };
 
-  const submitEditDialog = (index, table) => {
+  const submitEditDialog = (table) => {
     const newTables = [...(tables || {})];
-    newTables[index] = table;
+    newTables[editDialog.index] = table;
     setEditDialog(editDialogInitialState);
     updateMeetingTables(newTables);
   };
@@ -81,7 +81,7 @@ const TableGridEditor = ({ tables, updateMeetingTables }) => {
         } else if (tableIndex !== -1) {
           gridItems.push(
             <Button
-              className={`${classes.gridItem} ${classes.gridItemFilled}`}
+              className={`${classes.gridItem} ${classes.gridItemFill}`}
               onClick={() => editTable(tableIndex)}
             >
               <Avatar src={getTableImage(tables[tableIndex].type)} />
@@ -90,7 +90,7 @@ const TableGridEditor = ({ tables, updateMeetingTables }) => {
         } else {
           gridItems.push(
             <Button
-              className={`${classes.gridItem} ${classes.gridItemBlank}`}
+              className={`${classes.gridItem} ${classes.gridItemFill}`}
               onClick={() => addTable(toTablePos(row), toTablePos(col))}
             >
                

@@ -43,6 +43,8 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
   };
 
   const handleSubmit = () => {
+    table.logoUrl = table.logoUrl === "" ? undefined : table.logoUrl;
+    table.zoomUrl = table.zoomUrl === "" ? undefined : table.zoomUrl;
     onSubmit(table);
     setTable(tableInitialState);
     onClose();

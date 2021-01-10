@@ -4,7 +4,6 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import EventRooms from "./pages/EventRooms";
 import CreateEventRoom from "./pages/CreateEventRoom";
-import About from "./pages/About";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./theme";
 
@@ -45,15 +44,6 @@ const App = () => (
           render={(props) => (
             <Layout>
               <CreateEventRoom {...props} />
-            </Layout>
-          )}
-        />
-        <Route
-          exact
-          path="/about"
-          render={(props) => (
-            <Layout>
-              <About {...props} />
             </Layout>
           )}
         />

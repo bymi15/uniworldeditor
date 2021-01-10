@@ -31,8 +31,6 @@ import TableGridEditor from "../components/TableGridEditor";
 import EventRoomService from "../services/EventRoomService";
 import { useReducerState } from "../utils/customHooks";
 import { validateEventRoom } from "../utils/validate";
-import roundTable from "../assets/img/roundtable.png";
-import rectangularTable from "../assets/img/rectangulartable.png";
 
 const useStyles = makeStyles((theme) => ({
   mainSection: {
@@ -73,7 +71,6 @@ const CreateEventRoom = (props) => {
     title: "",
     scene: "Default",
     background: "none",
-    host: "",
     eventDate: moment().toISOString(),
     meetingTables: [],
   };
@@ -145,7 +142,7 @@ const CreateEventRoom = (props) => {
       <Typography variant="h4">Create Event Room</Typography>
       <Grid container spacing={2}>
         {" "}
-        <Grid item md={9} xs={12}>
+        <Grid item md={12}>
           <Card className={classes.eventInfoPanel}>
             <React.Fragment>
               <CardContent>
@@ -158,19 +155,6 @@ const CreateEventRoom = (props) => {
                       label="Title"
                       placeholder="Enter the event title"
                       value={eventRoom.title}
-                      onChange={handleChange}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                    <div className={classes.divider} />
-                    <TextField
-                      fullWidth
-                      disabled={isLoading}
-                      name="host"
-                      label="Host"
-                      value={eventRoom.host}
-                      placeholder="Enter the event host"
                       onChange={handleChange}
                       InputLabelProps={{
                         shrink: true,
@@ -281,53 +265,6 @@ const CreateEventRoom = (props) => {
               </CardActions>
             </React.Fragment>
           </Card>
-        </Grid>
-        <Grid item md={3} xs={12}>
-          <List component="nav" aria-label="meeting tables">
-            <Typography variant="subtitle2">Table Objects</Typography>
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar alt="Round Meeting Table" src={roundTable} />
-              </ListItemAvatar>
-              <ListItemText
-                primary="Round Meeting Table"
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      Ali Connors
-                    </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
-                  </React.Fragment>
-                }
-              />
-            </ListItem>
-            <ListItem alignItems="flex-start">
-              <ListItemAvatar>
-                <Avatar alt="Rectangular Meeting Table" src={rectangularTable} />
-              </ListItemAvatar>
-              <ListItemText
-                primary="Rectangular Meeting Table"
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="textPrimary"
-                    >
-                      Ali Connors
-                    </Typography>
-                    {" — I'll be in your neighborhood doing errands this…"}
-                  </React.Fragment>
-                }
-              />
-            </ListItem>
-          </List>
         </Grid>
       </Grid>
     </Container>

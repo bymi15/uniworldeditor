@@ -1,8 +1,12 @@
 import axios from "axios";
 
-export default axios.create({
+const axiosConfig = axios.create({
   baseURL: "https://uniworld.azurewebsites.net/api",
   headers: {
     "Content-type": "application/json",
   },
 });
+
+const platformURL = "https://brianmin.tech/UnityWebGL";
+
+export { axiosConfig, platformURL };

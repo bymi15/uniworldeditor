@@ -16,17 +16,17 @@ const useStyles = makeStyles((theme) => ({
     gridAutoFlow: "row",
   },
   gridItem: {
-    background: "#ccc",
     display: "flex",
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
   },
-  gridItemBlank: {
-    display: "flex",
-    textAlign: "center",
-    alignItems: "center",
-    justifyContent: "center",
+  gridItemFill: {
+    transition: "background 0.3s ease",
+    "&:hover": {
+      background: "#aaa",
+    },
+    background: "#ccc",
   },
 }));
 
@@ -39,15 +39,15 @@ const TableGrid = ({ tables }) => {
       for (let col = 0; col < 5; col++) {
         const tableIndex = getTableIndex(row, col, tables);
         if (isCorner(row, col)) {
-          gridItems.push(<div className={classes.gridItemBlank}> </div>);
+          gridItems.push(<div className={classes.gridItem}> </div>);
         } else if (tableIndex !== -1) {
           gridItems.push(
-            <div id={tableIndex} className={classes.gridItem}>
+            <div id={tableIndex} className={`${classes.gridItem} ${classes.gridItemFill}`}>
               <Avatar src={getTableImage(tables[tableIndex].type)} />
             </div>
           );
         } else {
-          gridItems.push(<div className={classes.gridItem}> </div>);
+          gridItems.push(<div className={`${classes.gridItem} ${classes.gridItemFill}`}> </div>);
         }
       }
     }
