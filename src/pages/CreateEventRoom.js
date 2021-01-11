@@ -114,8 +114,10 @@ const CreateEventRoom = (props) => {
         data.background = data.background === "none" ? undefined : data.background;
         const createdEventRoom = await EventRoomService.create(data);
         setEventRoom(eventRoomInitialState);
-        // showAlert("Successfully created event room.", "success");
-        props.history.push(`/eventrooms/${createdEventRoom._id}`);
+        props.history.push({
+          pathname: `/eventrooms/${createdEventRoom._id}`,
+          state: { created: true },
+        });
       } catch (err) {
         showAlert("Failed to create event room. Please try again later.", "error");
         console.log(err);

@@ -14,13 +14,16 @@ import {
   CardContent,
   Button,
   CircularProgress,
+  Snackbar,
 } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
 import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows";
 import AddIcon from "@material-ui/icons/Add";
 import TableGrid from "../components/TableGrid";
 import EventRoomService from "../services/EventRoomService";
 import { Link as RouterLink } from "react-router-dom";
 import { platformURL } from "../config";
+import { useReducerState } from "../utils/customHooks";
 
 const useStyles = makeStyles((theme) => ({
   mainSection: {
@@ -57,6 +60,26 @@ const EventRooms = (props) => {
   const [eventRooms, setEventRooms] = React.useState([]);
   const [currentEventRoom, setCurrentEventRoom] = React.useState(0);
   const [isLoading, setLoading] = React.useState(false);
+  const [alert, setAlert] = useReducerState({
+    open: false,
+    message: "",
+    type: "success",
+  });
+
+  const showAlert = (msg, type = "error") => {
+    setAlert({ open: true, message: msg, type: type });
+  };
+
+  const hideAlert = () => {
+    setAlert({ open: false });
+  };
+
+  React.useEffect(() => {
+    if (props.location.state && props.location.state.created) {
+      showAlert("Successfully created event room.", "success");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.location.state]);
 
   React.useEffect(() => {
     async function fetchEventRooms() {
@@ -102,6 +125,16 @@ const EventRooms = (props) => {
 
   return (
     <Container className={classes.mainSection}>
+      <Snackbar
+        open={alert.open}
+        autoHideDuration={3000}
+        onClose={hideAlert}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <MuiAlert elevation={6} variant="filled" onClose={hideAlert} severity={alert.type}>
+          {alert.message}
+        </MuiAlert>
+      </Snackbar>
       <Typography variant="h4">Event Rooms</Typography>
       {isLoading ? (
         <div className={classes.progressLoader}>
