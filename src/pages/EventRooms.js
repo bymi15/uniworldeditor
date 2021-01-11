@@ -190,9 +190,9 @@ const EventRooms = (props) => {
                     <Typography variant="h5" component="h2">
                       {eventRooms[currentEventRoom].title}
                     </Typography>
-                    <Typography color="textSecondary">
+                    {/* <Typography color="textSecondary">
                       Hosted by {eventRooms[currentEventRoom].host}
-                    </Typography>
+                    </Typography> */}
                     <div className={classes.divider} />
                     <Grid container>
                       <Grid item md={8} xs={12} className={classes.centerTableGrid}>
