@@ -44,7 +44,7 @@ const Home = () => {
             <Typography variant="h2">UniWorld Editor</Typography>
             <Typography variant="subtitle1">
               This is a web editor tool for managing event rooms in the{" "}
-              <a href="https://brianmin.tech/UnityWebGL/" target="_blank" rel="noreferrer noopener">
+              <a href="https://brianmin.tech/uniworld/" target="_blank" rel="noreferrer noopener">
                 UniWorld platform
               </a>
             </Typography>

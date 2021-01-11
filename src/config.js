@@ -7,6 +7,6 @@ const axiosConfig = axios.create({
   },
 });
 
-const platformURL = "https://brianmin.tech/UnityWebGL";
+const platformURL = "https://brianmin.tech/uniworld";
 
 export { axiosConfig, platformURL };
