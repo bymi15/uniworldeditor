@@ -16,4 +16,20 @@ const scenes = [
   { value: "ConferenceHall", label: "Conference Hall" },
 ];
 
-export { backgrounds, scenes };
+const findBackground = (value) => {
+  const res = backgrounds.find((background) => background.value === value);
+  if (res) {
+    return res.label;
+  }
+  return value;
+};
+
+const findScene = (value) => {
+  const res = scenes.find((scene) => scene.value === value);
+  if (res) {
+    return res.label;
+  }
+  return value;
+};
+
+export { backgrounds, scenes, findBackground, findScene };

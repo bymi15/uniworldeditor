@@ -24,6 +24,7 @@ import EventRoomService from "../services/EventRoomService";
 import { Link as RouterLink } from "react-router-dom";
 import { platformURL } from "../config";
 import { useReducerState } from "../utils/customHooks";
+import { findBackground, findScene } from "../utils/presets";
 
 const useStyles = makeStyles((theme) => ({
   mainSection: {
@@ -202,14 +203,12 @@ const EventRooms = (props) => {
                       <Grid item md={4} xs={12}>
                         <Typography variant="subtitle2">Scene: </Typography>
                         <Typography variant="body2">
-                          {eventRooms[currentEventRoom].scene}
+                          {findScene(eventRooms[currentEventRoom].scene)}
                         </Typography>
                         <div className={classes.divider} />
                         <Typography variant="subtitle2">Background: </Typography>
                         <Typography variant="body2">
-                          {eventRooms[currentEventRoom].background
-                            ? eventRooms[currentEventRoom].background
-                            : "None"}
+                          {findBackground(eventRooms[currentEventRoom].background)}
                         </Typography>
                         <div className={classes.divider} />
                         <Typography variant="subtitle2">Event Room URL: </Typography>
