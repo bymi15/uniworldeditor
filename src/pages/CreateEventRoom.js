@@ -3,11 +3,6 @@ import moment from "moment";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Avatar,
   Container,
   Typography,
   Card,
@@ -31,6 +26,7 @@ import TableGridEditor from "../components/TableGridEditor";
 import EventRoomService from "../services/EventRoomService";
 import { useReducerState } from "../utils/customHooks";
 import { validateEventRoom } from "../utils/validate";
+import { backgrounds, scenes } from "../utils/presets";
 
 const useStyles = makeStyles((theme) => ({
   mainSection: {
@@ -70,7 +66,7 @@ const CreateEventRoom = (props) => {
   const eventRoomInitialState = {
     title: "",
     scene: "Default",
-    background: "none",
+    background: "Default",
     eventDate: moment().toISOString(),
     meetingTables: [],
   };
@@ -191,18 +187,14 @@ const CreateEventRoom = (props) => {
                         onChange={handleChange}
                         row
                       >
-                        <FormControlLabel
-                          disabled={isLoading}
-                          value="Default"
-                          control={<Radio color="primary" />}
-                          label="Default"
-                        />
-                        <FormControlLabel
-                          disabled={isLoading}
-                          value="ConferenceHall"
-                          control={<Radio color="primary" />}
-                          label="Conference Hall"
-                        />
+                        {scenes.map((scene) => (
+                          <FormControlLabel
+                            disabled={isLoading}
+                            value={scene.value}
+                            control={<Radio color="primary" />}
+                            label={scene.label}
+                          />
+                        ))}
                       </RadioGroup>
                     </FormControl>
                     <div className={classes.divider} />
@@ -215,24 +207,14 @@ const CreateEventRoom = (props) => {
                         onChange={handleChange}
                         row
                       >
-                        <FormControlLabel
-                          disabled={isLoading}
-                          value="none"
-                          control={<Radio color="primary" />}
-                          label="None"
-                        />
-                        <FormControlLabel
-                          disabled={isLoading}
-                          value="UclMainQuad"
-                          control={<Radio color="primary" />}
-                          label="UCL Main Quad"
-                        />
-                        <FormControlLabel
-                          disabled={isLoading}
-                          value="Hall"
-                          control={<Radio color="primary" />}
-                          label="Hall"
-                        />
+                        {backgrounds.map((background) => (
+                          <FormControlLabel
+                            disabled={isLoading}
+                            value={background.value}
+                            control={<Radio color="primary" />}
+                            label={background.label}
+                          />
+                        ))}
                       </RadioGroup>
                     </FormControl>
                   </Grid>
