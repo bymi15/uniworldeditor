@@ -1,20 +1,31 @@
 {
   "files": {
-    "main.js": "/uniworldeditor/static/js/main.b27120e5.chunk.js",
-    "main.js.map": "/uniworldeditor/static/js/main.b27120e5.chunk.js.map",
-    "runtime-main.js": "/uniworldeditor/static/js/runtime-main.6730cd10.js",
-    "runtime-main.js.map": "/uniworldeditor/static/js/runtime-main.6730cd10.js.map",
-    "static/js/2.9f7ea1b7.chunk.js": "/uniworldeditor/static/js/2.9f7ea1b7.chunk.js",
-    "static/js/2.9f7ea1b7.chunk.js.map": "/uniworldeditor/static/js/2.9f7ea1b7.chunk.js.map",
-    "static/js/3.c56d83ef.chunk.js": "/uniworldeditor/static/js/3.c56d83ef.chunk.js",
-    "static/js/3.c56d83ef.chunk.js.map": "/uniworldeditor/static/js/3.c56d83ef.chunk.js.map",
+    "main.js": "/uniworldeditor/static/js/main.ec728990.chunk.js",
+    "main.js.map": "/uniworldeditor/static/js/main.ec728990.chunk.js.map",
+    "runtime-main.js": "/uniworldeditor/static/js/runtime-main.cee020ef.js",
+    "runtime-main.js.map": "/uniworldeditor/static/js/runtime-main.cee020ef.js.map",
+    "static/js/2.ce5354e1.chunk.js": "/uniworldeditor/static/js/2.ce5354e1.chunk.js",
+    "static/js/2.ce5354e1.chunk.js.map": "/uniworldeditor/static/js/2.ce5354e1.chunk.js.map",
+    "static/js/3.0edd5ce2.chunk.js": "/uniworldeditor/static/js/3.0edd5ce2.chunk.js",
+    "static/js/3.0edd5ce2.chunk.js.map": "/uniworldeditor/static/js/3.0edd5ce2.chunk.js.map",
     "index.html": "/uniworldeditor/index.html",
-    "static/js/2.9f7ea1b7.chunk.js.LICENSE.txt": "/uniworldeditor/static/js/2.9f7ea1b7.chunk.js.LICENSE.txt",
+    "static/js/2.ce5354e1.chunk.js.LICENSE.txt": "/uniworldeditor/static/js/2.ce5354e1.chunk.js.LICENSE.txt",
+    "static/media/BritishLibraryOutside.jpg": "/uniworldeditor/static/media/BritishLibraryOutside.457acb01.jpg",
+    "static/media/BritishMuseumOutside.jpg": "/uniworldeditor/static/media/BritishMuseumOutside.211553f5.jpg",
+    "static/media/ConferenceHall.jpg": "/uniworldeditor/static/media/ConferenceHall.dcbdd376.jpg",
+    "static/media/Default.jpg": "/uniworldeditor/static/media/Default.e3ac61f5.jpg",
+    "static/media/EiffelTowerSunset.jpg": "/uniworldeditor/static/media/EiffelTowerSunset.6fade2bd.jpg",
+    "static/media/Hall.jpg": "/uniworldeditor/static/media/Hall.ca876dfa.jpg",
+    "static/media/RoyalOperaHouse.jpg": "/uniworldeditor/static/media/RoyalOperaHouse.46a37390.jpg",
+    "static/media/SydneyOperaHouseOutside.jpg": "/uniworldeditor/static/media/SydneyOperaHouseOutside.f11f7b5a.jpg",
+    "static/media/TimesSquareNewYork.jpg": "/uniworldeditor/static/media/TimesSquareNewYork.318c884b.jpg",
+    "static/media/UclMainQuad.jpg": "/uniworldeditor/static/media/UclMainQuad.89df5f69.jpg",
+    "static/media/UclPrintRoomCafe.jpg": "/uniworldeditor/static/media/UclPrintRoomCafe.9592a09e.jpg",
     "static/media/uniworldscreenshot.52053eda.png": "/uniworldeditor/static/media/uniworldscreenshot.52053eda.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.6730cd10.js",
-    "static/js/2.9f7ea1b7.chunk.js",
-    "static/js/main.b27120e5.chunk.js"
+    "static/js/runtime-main.cee020ef.js",
+    "static/js/2.ce5354e1.chunk.js",
+    "static/js/main.ec728990.chunk.js"
   ]
 }
