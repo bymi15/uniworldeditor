@@ -1,19 +1,63 @@
 const backgrounds = [
-  { value: "Default", label: "Default" },
-  { value: "UclMainQuad", label: "UCL Main Quad" },
-  { value: "UclPrintRoomCafe", label: "UCL Print Room Cafe" },
-  { value: "Hall", label: "Hall" },
-  { value: "TimesSquareNewYork", label: "Times Square New York" },
-  { value: "RoyalOperaHouse", label: "Royal Opera House" },
-  { value: "SydneyOperaHouseOutside", label: "Sydney Opera House Outside" },
-  { value: "BritishLibraryOutside", label: "British Library Outside" },
-  { value: "BritishMuseumOutside", label: "British Museum Outside" },
-  { value: "EiffelTowerSunset", label: "Eiffel Tower Sunset" },
+  {
+    value: "Default",
+    label: "Default",
+    img: require(`../assets/img/backgrounds/Default.jpg`).default,
+  },
+  {
+    value: "UclMainQuad",
+    label: "UCL Main Quad",
+    img: require(`../assets/img/backgrounds/UclMainQuad.jpg`).default,
+  },
+  {
+    value: "UclPrintRoomCafe",
+    label: "UCL Print Room Cafe",
+    img: require(`../assets/img/backgrounds/UclPrintRoomCafe.jpg`).default,
+  },
+  { value: "Hall", label: "Hall", img: require(`../assets/img/backgrounds/Hall.jpg`).default },
+  {
+    value: "TimesSquareNewYork",
+    label: "Times Square New York",
+    img: require(`../assets/img/backgrounds/TimesSquareNewYork.jpg`).default,
+  },
+  {
+    value: "RoyalOperaHouse",
+    label: "Royal Opera House",
+    img: require(`../assets/img/backgrounds/RoyalOperaHouse.jpg`).default,
+  },
+  {
+    value: "SydneyOperaHouseOutside",
+    label: "Sydney Opera House Outside",
+    img: require(`../assets/img/backgrounds/SydneyOperaHouseOutside.jpg`).default,
+  },
+  {
+    value: "BritishLibraryOutside",
+    label: "British Library Outside",
+    img: require(`../assets/img/backgrounds/BritishLibraryOutside.jpg`).default,
+  },
+  {
+    value: "BritishMuseumOutside",
+    label: "British Museum Outside",
+    img: require(`../assets/img/backgrounds/BritishMuseumOutside.jpg`).default,
+  },
+  {
+    value: "EiffelTowerSunset",
+    label: "Eiffel Tower Sunset",
+    img: require(`../assets/img/backgrounds/EiffelTowerSunset.jpg`).default,
+  },
 ];
 
 const scenes = [
-  { value: "Default", label: "Default" },
-  { value: "ConferenceHall", label: "Conference Hall" },
+  {
+    value: "Default",
+    label: "Default",
+    img: require(`../assets/img/scenes/Default.jpg`).default,
+  },
+  {
+    value: "ConferenceHall",
+    label: "Conference Hall",
+    img: require(`../assets/img/scenes/ConferenceHall.jpg`).default,
+  },
 ];
 
 const findBackground = (value) => {
@@ -24,6 +68,15 @@ const findBackground = (value) => {
   return value;
 };
 
+const findBackgroundThumbnail = (value) => {
+  const res = backgrounds.find((background) => background.value === value);
+  if (res) {
+    console.log(res);
+    return res.img;
+  }
+  return "https://via.placeholder.com/150";
+};
+
 const findScene = (value) => {
   const res = scenes.find((scene) => scene.value === value);
   if (res) {
@@ -32,4 +85,19 @@ const findScene = (value) => {
   return value;
 };
 
-export { backgrounds, scenes, findBackground, findScene };
+const findSceneThumbnail = (value) => {
+  const res = scenes.find((scene) => scene.value === value);
+  if (res) {
+    return res.img;
+  }
+  return "https://via.placeholder.com/150";
+};
+
+export {
+  backgrounds,
+  scenes,
+  findBackground,
+  findScene,
+  findBackgroundThumbnail,
+  findSceneThumbnail,
+};

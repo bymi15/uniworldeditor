@@ -10,14 +10,10 @@ import {
   CardContent,
   Button,
   TextField,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  Radio,
-  FormControlLabel,
   Snackbar,
   CircularProgress,
 } from "@material-ui/core";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import MuiAlert from "@material-ui/lab/Alert";
 import MomentUtils from "@date-io/moment";
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
@@ -26,7 +22,14 @@ import TableGridEditor from "../components/TableGridEditor";
 import EventRoomService from "../services/EventRoomService";
 import { useReducerState } from "../utils/customHooks";
 import { validateEventRoom } from "../utils/validate";
-import { backgrounds, scenes } from "../utils/presets";
+import {
+  backgrounds,
+  scenes,
+  findBackground,
+  findScene,
+  findBackgroundThumbnail,
+  findSceneThumbnail,
+} from "../utils/presets";
 
 const useStyles = makeStyles((theme) => ({
   mainSection: {
@@ -87,6 +90,17 @@ const CreateEventRoom = (props) => {
 
   const hideAlert = () => {
     setAlert({ open: false });
+  };
+
+  const handleSelectScene = (e, value) => {
+    if (value !== "Default") {
+      setEventRoom({ scene: value, background: "Default" });
+    }
+    setEventRoom({ scene: value });
+  };
+
+  const handleSelectBackground = (e, value) => {
+    setEventRoom({ background: value });
   };
 
   const handleChange = (e) => {
@@ -178,45 +192,72 @@ const CreateEventRoom = (props) => {
                       />
                     </MuiPickersUtilsProvider>
                     <div className={classes.divider} />
-                    <FormControl component="fieldset">
-                      <FormLabel component="legend">Scene</FormLabel>
-                      <RadioGroup
-                        aria-label="scene"
-                        name="scene"
+                    {scenes && (
+                      <Autocomplete
+                        fullWidth
+                        disableClearable
+                        options={scenes.map((scene) => scene.value)}
+                        getOptionLabel={(val) => findScene(val)}
                         value={eventRoom.scene}
-                        onChange={handleChange}
-                        row
-                      >
-                        {scenes.map((scene) => (
-                          <FormControlLabel
-                            disabled={isLoading}
-                            value={scene.value}
-                            control={<Radio color="primary" />}
-                            label={scene.label}
+                        onChange={handleSelectScene}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="Scene"
+                            variant="outlined"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
                           />
-                        ))}
-                      </RadioGroup>
-                    </FormControl>
+                        )}
+                      />
+                    )}
                     <div className={classes.divider} />
-                    <FormControl component="fieldset">
-                      <FormLabel component="legend">Background</FormLabel>
-                      <RadioGroup
-                        aria-label="background"
-                        name="background"
+                    {backgrounds && eventRoom.scene === "Default" && (
+                      <Autocomplete
+                        fullWidth
+                        disableClearable
+                        options={backgrounds.map((background) => background.value)}
+                        getOptionLabel={(val) => findBackground(val)}
                         value={eventRoom.background}
-                        onChange={handleChange}
-                        row
-                      >
-                        {backgrounds.map((background) => (
-                          <FormControlLabel
-                            disabled={isLoading}
-                            value={background.value}
-                            control={<Radio color="primary" />}
-                            label={background.label}
+                        onChange={handleSelectBackground}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="Background"
+                            variant="outlined"
+                            InputLabelProps={{
+                              shrink: true,
+                            }}
                           />
-                        ))}
-                      </RadioGroup>
-                    </FormControl>
+                        )}
+                      />
+                    )}
+                    <div className={classes.divider} />
+                    <Grid container spacing={4}>
+                      <Grid item xs={6}>
+                        <Typography variant="subtitle2">Scene Preview</Typography>
+                        <img
+                          width="100%"
+                          alt="scene preview"
+                          src={findSceneThumbnail(eventRoom.scene)}
+                        />
+                        <Typography variant="caption">{findScene(eventRoom.scene)}</Typography>
+                      </Grid>
+                      {eventRoom.scene === "Default" && (
+                        <Grid item xs={6}>
+                          <Typography variant="subtitle2">Background Preview</Typography>
+                          <img
+                            width="100%"
+                            alt="background preview"
+                            src={findBackgroundThumbnail(eventRoom.background)}
+                          />
+                          <Typography variant="caption">
+                            {findBackground(eventRoom.background)}
+                          </Typography>
+                        </Grid>
+                      )}
+                    </Grid>
                   </Grid>
                   <Grid item md={7} xs={12}>
                     <Typography variant="subtitle2">Meeting Tables</Typography>
