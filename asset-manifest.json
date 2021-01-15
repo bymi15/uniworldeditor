@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/uniworldeditor/static/js/main.7368ac83.chunk.js",
-    "main.js.map": "/uniworldeditor/static/js/main.7368ac83.chunk.js.map",
+    "main.js": "/uniworldeditor/static/js/main.7aaeef3f.chunk.js",
+    "main.js.map": "/uniworldeditor/static/js/main.7aaeef3f.chunk.js.map",
     "runtime-main.js": "/uniworldeditor/static/js/runtime-main.cee020ef.js",
     "runtime-main.js.map": "/uniworldeditor/static/js/runtime-main.cee020ef.js.map",
-    "static/js/2.8bd09e92.chunk.js": "/uniworldeditor/static/js/2.8bd09e92.chunk.js",
-    "static/js/2.8bd09e92.chunk.js.map": "/uniworldeditor/static/js/2.8bd09e92.chunk.js.map",
+    "static/js/2.5b6f18ec.chunk.js": "/uniworldeditor/static/js/2.5b6f18ec.chunk.js",
+    "static/js/2.5b6f18ec.chunk.js.map": "/uniworldeditor/static/js/2.5b6f18ec.chunk.js.map",
     "static/js/3.0edd5ce2.chunk.js": "/uniworldeditor/static/js/3.0edd5ce2.chunk.js",
     "static/js/3.0edd5ce2.chunk.js.map": "/uniworldeditor/static/js/3.0edd5ce2.chunk.js.map",
     "index.html": "/uniworldeditor/index.html",
-    "static/js/2.8bd09e92.chunk.js.LICENSE.txt": "/uniworldeditor/static/js/2.8bd09e92.chunk.js.LICENSE.txt",
+    "static/js/2.5b6f18ec.chunk.js.LICENSE.txt": "/uniworldeditor/static/js/2.5b6f18ec.chunk.js.LICENSE.txt",
     "static/media/BritishLibraryOutside.jpg": "/uniworldeditor/static/media/BritishLibraryOutside.457acb01.jpg",
     "static/media/BritishMuseumOutside.jpg": "/uniworldeditor/static/media/BritishMuseumOutside.211553f5.jpg",
     "static/media/ConferenceHall.jpg": "/uniworldeditor/static/media/ConferenceHall.dcbdd376.jpg",
@@ -25,7 +25,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.cee020ef.js",
-    "static/js/2.8bd09e92.chunk.js",
-    "static/js/main.7368ac83.chunk.js"
+    "static/js/2.5b6f18ec.chunk.js",
+    "static/js/main.7aaeef3f.chunk.js"
   ]
 }
