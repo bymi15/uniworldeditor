@@ -9,14 +9,15 @@ import {
   DialogContent,
   FormControl,
   FormControlLabel,
-  FormLabel,
   Radio,
   RadioGroup,
   InputAdornment,
   Avatar,
   CircularProgress,
   Typography,
+  Grid,
 } from "@material-ui/core";
+import PublishIcon from "@material-ui/icons/Publish";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { useReducerState } from "../utils/customHooks";
 import BlobService from "../services/BlobService";
@@ -28,6 +29,37 @@ const useStyles = makeStyles((theme) => ({
   },
   textMuted: {
     color: "rgba(0, 0, 0, 0.54)",
+  },
+  padLeft: {
+    paddingLeft: theme.spacing(1),
+  },
+  padRight: {
+    paddingRight: theme.spacing(1),
+  },
+  flexDisplay: {
+    display: "flex",
+  },
+  fileUpload: {
+    width: "0.1px",
+    height: "0.1px",
+    opacity: 0,
+    overflow: "hidden",
+    position: "absolute",
+    zIndex: -1,
+  },
+  fileUploadLabel: {
+    "&:focus": {
+      outline: "1px dotted #000",
+    },
+    fontSize: "1rem",
+    fontWeight: 700,
+    color: "#fff",
+    backgroundColor: theme.palette.info.main,
+    display: "inline-block",
+    padding: theme.spacing(1),
+    cursor: "pointer",
+    width: "180px",
+    paddingTop: "14px",
   },
 }));
 
@@ -76,6 +108,18 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
   const handleClose = () => {
     resetTableState();
     onClose();
+  };
+
+  const handleUpload = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (file && file.name.match(/\.(jpg|jpeg|png|gif)$/)) {
+      const formData = new FormData();
+      formData.append("image", e.target.files[0]);
+      const logoUrl = await BlobService.upload(formData, "logos");
+      setLogos([...logos, logoUrl]);
+      setTable({ logoUrl });
+    }
   };
 
   const handleSubmit = () => {
@@ -143,49 +187,66 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
           }}
         />
         <div className={classes.divider} />
-        <Autocomplete
-          fullWidth
-          disableClearable
-          options={logos}
-          loading={loading}
-          getOptionLabel={(logo) => getFileNameFromBlobUrl(logo)}
-          renderOption={(option) => (
-            <React.Fragment>
-              <InputAdornment position="start">
-                <Avatar alt="logo" src={option || "https://via.placeholder.com/150"} />
-              </InputAdornment>
-              {getFileNameFromBlobUrl(option)}
-            </React.Fragment>
-          )}
-          value={table.logoUrl}
-          onChange={(e, value) => {
-            setTable({ logoUrl: value });
-          }}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Logo"
-              variant="outlined"
-              InputProps={{
-                ...params.InputProps,
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Avatar alt="logo" src={table.logoUrl || "https://via.placeholder.com/150"} />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <React.Fragment>
-                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
-                    {params.InputProps.endAdornment}
-                  </React.Fragment>
-                ),
+        <Grid container>
+          <Grid className={classes.flexDisplay} item xs>
+            <Autocomplete
+              className={classes.padRight}
+              fullWidth
+              disableClearable
+              options={logos}
+              loading={loading}
+              getOptionLabel={(logo) => getFileNameFromBlobUrl(logo)}
+              renderOption={(option) => (
+                <React.Fragment>
+                  <Avatar alt="logo" src={option || "https://via.placeholder.com/150"} />
+                  <span className={classes.padLeft}>{getFileNameFromBlobUrl(option)}</span>
+                </React.Fragment>
+              )}
+              value={table.logoUrl}
+              onChange={(e, value) => {
+                setTable({ logoUrl: value });
               }}
-              InputLabelProps={{
-                shrink: true,
-              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Logo"
+                  variant="outlined"
+                  InputProps={{
+                    ...params.InputProps,
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Avatar
+                          alt="logo"
+                          src={table.logoUrl || "https://via.placeholder.com/150"}
+                        />
+                      </InputAdornment>
+                    ),
+                    endAdornment: (
+                      <React.Fragment>
+                        {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                        {params.InputProps.endAdornment}
+                      </React.Fragment>
+                    ),
+                  }}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              )}
             />
-          )}
-        />
+            <input
+              type="file"
+              id="logoUpload"
+              name="logoUpload"
+              className={classes.fileUpload}
+              onChange={handleUpload}
+            />
+            <label for="logoUpload" className={classes.fileUploadLabel}>
+              <PublishIcon fontSize="small" style={{ paddingTop: "4px" }} />
+              Upload Logo
+            </label>
+          </Grid>
+        </Grid>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary">

@@ -8,7 +8,12 @@ class BlobService {
   }
 
   async upload(data, container) {
-    return (await axiosConfig.post(`${this.url}/${container}`, data)).data.url;
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    return (await axiosConfig.post(`${this.url}/${container}`, data, config)).data.url;
   }
 }
 
