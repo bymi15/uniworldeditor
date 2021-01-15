@@ -9,13 +9,17 @@ const useStyles = makeStyles((theme) => ({
   gridContainer: {
     display: "grid",
     gridGap: "5px",
-    gridTemplateColumns: "repeat(5, 75px)",
-    gridTemplateRows: "repeat(5, 75px)",
-    [theme.breakpoints.down("xs")]: {
-      gridTemplateColumns: "repeat(5, 50px)",
-      gridTemplateRows: "repeat(5, 50px)",
-    },
     gridAutoFlow: "row",
+    gridTemplateColumns: "repeat(5, 100px)",
+    gridTemplateRows: "repeat(5, 100px)",
+    [theme.breakpoints.down("md")]: {
+      gridTemplateColumns: "repeat(5, 75px)",
+      gridTemplateRows: "repeat(5, 75px)",
+    },
+    [theme.breakpoints.down("xs")]: {
+      gridTemplateColumns: "repeat(5, 64px)",
+      gridTemplateRows: "repeat(5, 64px)",
+    },
   },
   gridItem: {
     display: "flex",
