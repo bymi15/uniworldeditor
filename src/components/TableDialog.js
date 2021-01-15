@@ -126,6 +126,7 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
           margin="dense"
           name="title"
           label="Meeting Title"
+          placeholder="e.g. Team 1 Project Demo"
           type="text"
           fullWidth
           value={table.title}
@@ -156,6 +157,7 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
           margin="dense"
           name="zoomUrl"
           label="Zoom URL"
+          placeholder="e.g. https://us04web.zoom.us/..."
           type="text"
           fullWidth
           value={table.zoomUrl}
@@ -171,6 +173,7 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
               className={classes.padRight}
               fullWidth
               disableClearable
+              noOptionsText="No options. Please upload a logo."
               options={logos}
               loading={loading}
               getOptionLabel={(logo) => getFileNameFromBlobUrl(logo)}
@@ -193,10 +196,7 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
                     ...params.InputProps,
                     startAdornment: (
                       <InputAdornment position="start">
-                        <Avatar
-                          alt="logo"
-                          src={table.logoUrl || "https://via.placeholder.com/150"}
-                        />
+                        {table.logoUrl && <Avatar alt="logo" src={table.logoUrl} />}
                       </InputAdornment>
                     ),
                     endAdornment: (
