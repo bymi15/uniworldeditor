@@ -24,13 +24,15 @@ import EventRoomService from "../services/EventRoomService";
 import { useReducerState } from "../utils/customHooks";
 import { validateEventRoom } from "../utils/validate";
 import {
-  backgrounds,
+  backgrounds as backgroundPresets,
   scenes,
   findBackground,
   findScene,
   findBackgroundThumbnail,
   findSceneThumbnail,
+  isBackgroundPreset,
 } from "../utils/presets";
+import { getFileNameFromBlobUrl } from "../utils/blobs";
 import BlobService from "../services/BlobService";
 
 const useStyles = makeStyles((theme) => ({
@@ -104,6 +106,22 @@ const CreateEventRoom = (props) => {
     message: "",
     type: "success",
   });
+  const [backgrounds, setBackgrounds] = React.useState([]);
+
+  React.useEffect(() => {
+    async function fetchBackgrounds() {
+      try {
+        const fetchedBackgrounds = await BlobService.get("backgrounds");
+        setBackgrounds([
+          ...backgroundPresets.map((background) => background.value),
+          ...fetchedBackgrounds,
+        ]);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    fetchBackgrounds();
+  }, [setBackgrounds]);
 
   const updateMeetingTables = (newTables) => {
     setEventRoom({ meetingTables: newTables });
@@ -142,7 +160,7 @@ const CreateEventRoom = (props) => {
       const formData = new FormData();
       formData.append("image", e.target.files[0]);
       const background = await BlobService.upload(formData, "backgrounds");
-      //setLogos([...logos, logoUrl]);
+      setBackgrounds([...backgrounds, background]);
       setEventRoom({ background });
     }
   };
@@ -257,8 +275,13 @@ const CreateEventRoom = (props) => {
                           fullWidth
                           className={classes.padRight}
                           disableClearable
-                          options={backgrounds.map((background) => background.value)}
-                          getOptionLabel={(val) => findBackground(val)}
+                          options={backgrounds}
+                          groupBy={(option) => (isBackgroundPreset(option) ? "Preset" : "Custom")}
+                          getOptionLabel={(option) =>
+                            isBackgroundPreset(option)
+                              ? findBackground(option)
+                              : getFileNameFromBlobUrl(option)
+                          }
                           value={eventRoom.background}
                           onChange={handleSelectBackground}
                           renderInput={(params) => (
@@ -291,7 +314,11 @@ const CreateEventRoom = (props) => {
                             <img
                               width="100%"
                               alt="background preview"
-                              src={findBackgroundThumbnail(eventRoom.background)}
+                              src={
+                                isBackgroundPreset(eventRoom.background)
+                                  ? findBackgroundThumbnail(eventRoom.background)
+                                  : eventRoom.background
+                              }
                             />
                           </div>
                         ) : (
@@ -320,7 +347,9 @@ const CreateEventRoom = (props) => {
                               Background:
                             </Typography>
                             <Typography component="h3" variant="caption">
-                              {findBackground(eventRoom.background)}
+                              {isBackgroundPreset(eventRoom.background)
+                                ? findBackground(eventRoom.background)
+                                : getFileNameFromBlobUrl(eventRoom.background)}
                             </Typography>
                           </React.Fragment>
                         )}

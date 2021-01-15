@@ -60,6 +60,10 @@ const scenes = [
   },
 ];
 
+const isBackgroundPreset = (value) => {
+  return backgrounds.find((background) => background.value === value) ? true : false;
+};
+
 const findBackground = (value) => {
   const res = backgrounds.find((background) => background.value === value);
   if (res) {
@@ -100,4 +104,5 @@ export {
   findScene,
   findBackgroundThumbnail,
   findSceneThumbnail,
+  isBackgroundPreset,
 };
