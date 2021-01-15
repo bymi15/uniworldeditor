@@ -17,8 +17,8 @@ import {
   Typography,
   Grid,
 } from "@material-ui/core";
-import PublishIcon from "@material-ui/icons/Publish";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import FileUpload from "./FileUpload";
 import { useReducerState } from "../utils/customHooks";
 import BlobService from "../services/BlobService";
 import { getFileNameFromBlobUrl } from "../utils/blobs";
@@ -38,28 +38,6 @@ const useStyles = makeStyles((theme) => ({
   },
   flexDisplay: {
     display: "flex",
-  },
-  fileUpload: {
-    width: "0.1px",
-    height: "0.1px",
-    opacity: 0,
-    overflow: "hidden",
-    position: "absolute",
-    zIndex: -1,
-  },
-  fileUploadLabel: {
-    "&:focus": {
-      outline: "1px dotted #000",
-    },
-    fontSize: "1rem",
-    fontWeight: 700,
-    color: "#fff",
-    backgroundColor: theme.palette.info.main,
-    display: "inline-block",
-    padding: theme.spacing(1),
-    cursor: "pointer",
-    width: "180px",
-    paddingTop: "14px",
   },
 }));
 
@@ -234,17 +212,9 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
                 />
               )}
             />
-            <input
-              type="file"
-              id="logoUpload"
-              name="logoUpload"
-              className={classes.fileUpload}
-              onChange={handleUpload}
-            />
-            <label for="logoUpload" className={classes.fileUploadLabel}>
-              <PublishIcon fontSize="small" style={{ paddingTop: "4px" }} />
+            <FileUpload name="uploadLogo" onChange={handleUpload}>
               Upload Logo
-            </label>
+            </FileUpload>
           </Grid>
         </Grid>
       </DialogContent>
