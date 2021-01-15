@@ -24,7 +24,8 @@ import EventRoomService from "../services/EventRoomService";
 import { Link as RouterLink } from "react-router-dom";
 import { platformURL } from "../config";
 import { useReducerState } from "../utils/customHooks";
-import { findBackground, findScene } from "../utils/presets";
+import { findBackground, findScene, isBackgroundPreset } from "../utils/presets";
+import { getFileNameFromBlobUrl } from "../utils/blobs";
 
 const useStyles = makeStyles((theme) => ({
   mainSection: {
@@ -208,7 +209,9 @@ const EventRooms = (props) => {
                         <div className={classes.divider} />
                         <Typography variant="subtitle2">Background: </Typography>
                         <Typography variant="body2">
-                          {findBackground(eventRooms[currentEventRoom].background)}
+                          {isBackgroundPreset(eventRooms[currentEventRoom].background)
+                            ? findBackground(eventRooms[currentEventRoom].background)
+                            : getFileNameFromBlobUrl(eventRooms[currentEventRoom].background)}
                         </Typography>
                         <div className={classes.divider} />
                         <Typography variant="subtitle2">Event Room URL: </Typography>
