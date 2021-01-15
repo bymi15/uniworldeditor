@@ -12,12 +12,22 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
+  InputAdornment,
+  Avatar,
+  CircularProgress,
+  Typography,
 } from "@material-ui/core";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 import { useReducerState } from "../utils/customHooks";
+import BlobService from "../services/BlobService";
+import { getFileNameFromBlobUrl } from "../utils/blobs";
 
 const useStyles = makeStyles((theme) => ({
   divider: {
     padding: theme.spacing(1),
+  },
+  textMuted: {
+    color: "rgba(0, 0, 0, 0.54)",
   },
 }));
 
@@ -30,6 +40,8 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
     logoUrl: "",
   };
   const [table, setTable] = useReducerState(tableInitialState);
+  const [logos, setLogos] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (updateTable !== undefined) {
@@ -37,8 +49,32 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
     }
   }, [updateTable, setTable]);
 
-  const handleClose = () => {
+  React.useEffect(() => {
+    async function fetchLogos() {
+      try {
+        setLoading(true);
+        const fetchedLogos = await BlobService.get("logos");
+        setLogos(fetchedLogos);
+        if (Array.isArray(fetchedLogos) && fetchedLogos.length > 0) {
+          setTable({ logoUrl: fetchedLogos[0] });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+      setLoading(false);
+    }
+    fetchLogos();
+  }, [setTable]);
+
+  const resetTableState = () => {
     setTable(tableInitialState);
+    if (Array.isArray(logos) && logos.length > 0) {
+      setTable({ logoUrl: logos[0] });
+    }
+  };
+
+  const handleClose = () => {
+    resetTableState();
     onClose();
   };
 
@@ -46,7 +82,7 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
     table.logoUrl = table.logoUrl === "" ? undefined : table.logoUrl;
     table.zoomUrl = table.zoomUrl === "" ? undefined : table.zoomUrl;
     onSubmit(table);
-    setTable(tableInitialState);
+    resetTableState();
     onClose();
   };
 
@@ -72,10 +108,15 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
           fullWidth
           value={table.title}
           onChange={handleChange}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
         <div className={classes.divider} />
         <FormControl component="fieldset">
-          <FormLabel component="legend">Table Type</FormLabel>
+          <Typography variant="caption" className={classes.textMuted}>
+            Table Type
+          </Typography>
           <RadioGroup aria-label="type" name="type" value={table.type} onChange={handleChange} row>
             <FormControlLabel
               value="RoundMeetingTable"
@@ -97,15 +138,53 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
           fullWidth
           value={table.zoomUrl}
           onChange={handleChange}
+          InputLabelProps={{
+            shrink: true,
+          }}
         />
-        <TextField
-          margin="dense"
-          name="logoUrl"
-          label="Logo URL"
-          type="text"
+        <div className={classes.divider} />
+        <Autocomplete
           fullWidth
+          disableClearable
+          options={logos}
+          loading={loading}
+          getOptionLabel={(logo) => getFileNameFromBlobUrl(logo)}
+          renderOption={(option) => (
+            <React.Fragment>
+              <InputAdornment position="start">
+                <Avatar alt="logo" src={option || "https://via.placeholder.com/150"} />
+              </InputAdornment>
+              {getFileNameFromBlobUrl(option)}
+            </React.Fragment>
+          )}
           value={table.logoUrl}
-          onChange={handleChange}
+          onChange={(e, value) => {
+            setTable({ logoUrl: value });
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Logo"
+              variant="outlined"
+              InputProps={{
+                ...params.InputProps,
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Avatar alt="logo" src={table.logoUrl || "https://via.placeholder.com/150"} />
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <React.Fragment>
+                    {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                    {params.InputProps.endAdornment}
+                  </React.Fragment>
+                ),
+              }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+          )}
         />
       </DialogContent>
       <DialogActions>
