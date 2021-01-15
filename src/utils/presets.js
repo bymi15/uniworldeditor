@@ -51,7 +51,7 @@ const scenes = [
   {
     value: "Default",
     label: "Default",
-    img: require(`../assets/img/scenes/Default.jpg`).default,
+    img: require(`../assets/img/scenes/Default.png`).default,
   },
   {
     value: "ConferenceHall",

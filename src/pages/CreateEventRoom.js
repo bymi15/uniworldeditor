@@ -19,6 +19,7 @@ import MomentUtils from "@date-io/moment";
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from "@material-ui/pickers";
 import AddIcon from "@material-ui/icons/Add";
 import TableGridEditor from "../components/TableGridEditor";
+import FileUpload from "../components/FileUpload";
 import EventRoomService from "../services/EventRoomService";
 import { useReducerState } from "../utils/customHooks";
 import { validateEventRoom } from "../utils/validate";
@@ -30,6 +31,7 @@ import {
   findBackgroundThumbnail,
   findSceneThumbnail,
 } from "../utils/presets";
+import BlobService from "../services/BlobService";
 
 const useStyles = makeStyles((theme) => ({
   mainSection: {
@@ -60,6 +62,29 @@ const useStyles = makeStyles((theme) => ({
   progressLoader: {
     color: "#fff",
     marginRight: theme.spacing(2),
+  },
+  padTop: {
+    paddingTop: theme.spacing(1),
+  },
+  padRight: {
+    paddingRight: theme.spacing(1),
+  },
+  flexDisplay: {
+    display: "flex",
+  },
+  circle: {
+    position: "absolute",
+    margin: "auto",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    height: "40%",
+    width: "70%",
+    background: "rgba(166,166,166,0.7)",
+    zIndex: 2,
+    borderRadius: "50%",
+    border: "1px solid #aaa",
   },
 }));
 
@@ -108,6 +133,18 @@ const CreateEventRoom = (props) => {
     setEventRoom({
       [name]: value,
     });
+  };
+
+  const handleUploadBackground = async (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (file && file.name.match(/\.(jpg|jpeg|png|gif)$/)) {
+      const formData = new FormData();
+      formData.append("image", e.target.files[0]);
+      const background = await BlobService.upload(formData, "backgrounds");
+      //setLogos([...logos, logoUrl]);
+      setEventRoom({ background });
+    }
   };
 
   const handleDateChange = (val) => {
@@ -213,50 +250,81 @@ const CreateEventRoom = (props) => {
                       />
                     )}
                     <div className={classes.divider} />
+
                     {backgrounds && eventRoom.scene === "Default" && (
-                      <Autocomplete
-                        fullWidth
-                        disableClearable
-                        options={backgrounds.map((background) => background.value)}
-                        getOptionLabel={(val) => findBackground(val)}
-                        value={eventRoom.background}
-                        onChange={handleSelectBackground}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            label="Background"
-                            variant="outlined"
-                            InputLabelProps={{
-                              shrink: true,
-                            }}
-                          />
-                        )}
-                      />
+                      <Grid className={classes.flexDisplay} item xs>
+                        <Autocomplete
+                          fullWidth
+                          className={classes.padRight}
+                          disableClearable
+                          options={backgrounds.map((background) => background.value)}
+                          getOptionLabel={(val) => findBackground(val)}
+                          value={eventRoom.background}
+                          onChange={handleSelectBackground}
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              label="Background"
+                              variant="outlined"
+                              InputLabelProps={{
+                                shrink: true,
+                              }}
+                            />
+                          )}
+                        />
+                        <FileUpload
+                          name="backgroundUpload"
+                          onChange={handleUploadBackground}
+                          width="120px"
+                        >
+                          Upload
+                        </FileUpload>
+                      </Grid>
                     )}
                     <div className={classes.divider} />
                     <Grid container spacing={4}>
                       <Grid item xs={6}>
                         <Typography variant="subtitle2">Scene Preview</Typography>
-                        <img
-                          width="100%"
-                          alt="scene preview"
-                          src={findSceneThumbnail(eventRoom.scene)}
-                        />
-                        <Typography variant="caption">{findScene(eventRoom.scene)}</Typography>
-                      </Grid>
-                      {eventRoom.scene === "Default" && (
-                        <Grid item xs={6}>
-                          <Typography variant="subtitle2">Background Preview</Typography>
+                        {eventRoom.scene === "Default" ? (
+                          <div style={{ position: "relative" }}>
+                            <div className={classes.circle}></div>
+                            <img
+                              width="100%"
+                              alt="background preview"
+                              src={findBackgroundThumbnail(eventRoom.background)}
+                            />
+                          </div>
+                        ) : (
                           <img
                             width="100%"
-                            alt="background preview"
-                            src={findBackgroundThumbnail(eventRoom.background)}
+                            alt="scene preview"
+                            src={findSceneThumbnail(eventRoom.scene)}
                           />
-                          <Typography variant="caption">
-                            {findBackground(eventRoom.background)}
-                          </Typography>
-                        </Grid>
-                      )}
+                        )}
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Typography variant="subtitle2"> </Typography>
+                        <Typography component="h3" variant="subtitle2">
+                          Scene:
+                        </Typography>
+                        <Typography component="h3" variant="caption">
+                          {findScene(eventRoom.scene)}
+                        </Typography>
+                        {eventRoom.scene === "Default" && (
+                          <React.Fragment>
+                            <Typography
+                              component="h3"
+                              variant="subtitle2"
+                              className={classes.padTop}
+                            >
+                              Background:
+                            </Typography>
+                            <Typography component="h3" variant="caption">
+                              {findBackground(eventRoom.background)}
+                            </Typography>
+                          </React.Fragment>
+                        )}
+                      </Grid>
                     </Grid>
                   </Grid>
                   <Grid item md={7} xs={12}>
