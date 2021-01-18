@@ -9,7 +9,7 @@ import theme from "./theme";
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <BrowserRouter>
+    <BrowserRouter basename="/uniworldeditor">
       <Switch>
         <Route
           exact
