@@ -123,6 +123,10 @@ const EventRooms = (props) => {
 
   const handleClickEdit = (index) => {
     console.log(eventRooms[index]);
+    props.history.push({
+      pathname: "/edit",
+      state: { eventRoom: eventRooms[index] },
+    });
   };
 
   return (

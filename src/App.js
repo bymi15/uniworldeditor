@@ -6,6 +6,7 @@ import EventRooms from "./pages/EventRooms";
 import CreateEventRoom from "./pages/CreateEventRoom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./theme";
+import EditEventRoom from "./pages/EditEventRoom";
 
 const App = () => (
   <ThemeProvider theme={theme}>
@@ -44,6 +45,15 @@ const App = () => (
           render={(props) => (
             <Layout>
               <CreateEventRoom {...props} />
+            </Layout>
+          )}
+        />
+        <Route
+          exact
+          path="/edit"
+          render={(props) => (
+            <Layout>
+              <EditEventRoom {...props} />
             </Layout>
           )}
         />

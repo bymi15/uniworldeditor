@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CreateEventRoom = (props) => {
+const EditEventRoom = (props) => {
   const classes = useStyles();
   const [alert, setAlert] = useReducerState({
     open: false,
@@ -30,15 +30,16 @@ const CreateEventRoom = (props) => {
   };
 
   const handleSubmit = async (data) => {
+    const id = props.location.state.eventRoom.id;
     if (validateEventRoom(data)) {
       try {
-        const createdEventRoom = await EventRoomService.create(data);
+        const updatedEventRoom = await EventRoomService.update(id, data);
         props.history.push({
-          pathname: `/eventrooms/${createdEventRoom._id}`,
+          pathname: `/eventrooms/${updatedEventRoom._id}`,
           state: { created: true },
         });
       } catch (err) {
-        showAlert("Failed to create event room. Please try again later.", "error");
+        showAlert("Failed to edit event room. Please try again later.", "error");
         console.log(err);
       }
     } else {
@@ -58,10 +59,14 @@ const CreateEventRoom = (props) => {
           {alert.message}
         </MuiAlert>
       </Snackbar>
-      <Typography variant="h4">Create Event Room</Typography>
-      <EventRoomForm onSubmit={handleSubmit} submitText="Create Event Room" />
+      <Typography variant="h4">Edit Event Room</Typography>
+      <EventRoomForm
+        onSubmit={handleSubmit}
+        submitText="Save Event Room"
+        updateEventRoom={props.location.state.eventRoom}
+      />
     </Container>
   );
 };
 
-export default CreateEventRoom;
+export default EditEventRoom;
