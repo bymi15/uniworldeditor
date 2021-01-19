@@ -12,17 +12,25 @@ const getTableImage = (tableType) => {
   }
 };
 
-const isCorner = (row, col) =>
+const isEdge = (row, col) =>
   (row === 0 && col === 0) ||
-  (row === 4 && col === 4) ||
-  (row === 4 && col === 0) ||
-  (row === 0 && col === 4);
+  (row === 8 && col === 8) ||
+  (row === 8 && col === 0) ||
+  (row === 0 && col === 8) ||
+  (row === 8 && col === 7) ||
+  (row === 7 && col === 8) ||
+  (row === 8 && col === 1) ||
+  (row === 1 && col === 8) ||
+  (row === 0 && col === 7) ||
+  (row === 7 && col === 0) ||
+  (row === 0 && col === 1) ||
+  (row === 1 && col === 0);
 
 const getTableIndex = (row, col, tables) => {
   for (let i = 0; i < tables.length; i++) {
-    // convert (-2 to 2 range) coordinates into (0 to 4 range) coordinates
-    const newX = Math.abs(tables[i].posX - 2);
-    const newY = Math.abs(tables[i].posY - 2);
+    // convert (-4 to 4 range) coordinates into (0 to 8 range) coordinates
+    const newX = Math.abs(tables[i].posX - 4);
+    const newY = Math.abs(tables[i].posY - 4);
     if (newX === row && newY === col) {
       return i;
     }
@@ -30,6 +38,6 @@ const getTableIndex = (row, col, tables) => {
   return -1;
 };
 
-const toTablePos = (x) => (x - 2) * -1;
+const toTablePos = (x) => (x - 4) * -1;
 
-export { isCorner, getTableIndex, toTablePos, getTableImage };
+export { isEdge, getTableIndex, toTablePos, getTableImage };

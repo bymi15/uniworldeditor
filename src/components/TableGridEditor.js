@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Avatar } from "@material-ui/core";
-import { isCorner, getTableIndex, toTablePos, getTableImage } from "../utils/tableUtils";
+import { isEdge, getTableIndex, toTablePos, getTableImage } from "../utils/tableUtils";
 import TableDialog from "./TableDialog";
 import { useReducerState } from "../utils/customHooks";
 
@@ -10,15 +10,15 @@ const useStyles = makeStyles((theme) => ({
     display: "grid",
     gridGap: "5px",
     gridAutoFlow: "row",
-    gridTemplateColumns: "repeat(5, 100px)",
-    gridTemplateRows: "repeat(5, 100px)",
+    gridTemplateColumns: "repeat(9, 65px)",
+    gridTemplateRows: "repeat(9, 65px)",
     [theme.breakpoints.down("md")]: {
-      gridTemplateColumns: "repeat(5, 75px)",
-      gridTemplateRows: "repeat(5, 75px)",
+      gridTemplateColumns: "repeat(9, 45px)",
+      gridTemplateRows: "repeat(9, 45px)",
     },
     [theme.breakpoints.down("xs")]: {
-      gridTemplateColumns: "repeat(5, 64px)",
-      gridTemplateRows: "repeat(5, 64px)",
+      gridTemplateColumns: "repeat(9, 36px)",
+      gridTemplateRows: "repeat(9, 36px)",
     },
   },
   gridItem: {
@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     alignItems: "center",
     justifyContent: "center",
+    minWidth: "36px",
   },
   gridItemFill: {
     background: "#ccc",
@@ -68,6 +69,7 @@ const TableGridEditor = ({ tables, updateMeetingTables }) => {
   };
 
   const addTable = (posX, posY) => {
+    console.log(posX + "," + posY);
     setDialog({
       open: true,
       posX: posX,
@@ -77,10 +79,10 @@ const TableGridEditor = ({ tables, updateMeetingTables }) => {
 
   const generateGridItems = () => {
     const gridItems = [];
-    for (let row = 0; row < 5; row++) {
-      for (let col = 0; col < 5; col++) {
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 9; col++) {
         const tableIndex = getTableIndex(row, col, tables);
-        if (isCorner(row, col)) {
+        if (isEdge(row, col)) {
           gridItems.push(<div className={classes.gridItem}> </div>);
         } else if (tableIndex !== -1) {
           gridItems.push(

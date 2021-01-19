@@ -1,17 +1,17 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Avatar } from "@material-ui/core";
-import { isCorner, getTableIndex, getTableImage } from "../utils/tableUtils";
+import { isEdge, getTableIndex, getTableImage } from "../utils/tableUtils";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
     display: "grid",
     gridGap: "5px",
-    gridTemplateColumns: "repeat(5, 75px)",
-    gridTemplateRows: "repeat(5, 75px)",
+    gridTemplateColumns: "repeat(9, 50px)",
+    gridTemplateRows: "repeat(9, 50px)",
     [theme.breakpoints.down("xs")]: {
-      gridTemplateColumns: "repeat(5, 50px)",
-      gridTemplateRows: "repeat(5, 50px)",
+      gridTemplateColumns: "repeat(9, 36px)",
+      gridTemplateRows: "repeat(9, 36px)",
     },
     gridAutoFlow: "row",
   },
@@ -35,10 +35,10 @@ const TableGrid = ({ tables }) => {
 
   const generateGridItems = () => {
     const gridItems = [];
-    for (let row = 0; row < 5; row++) {
-      for (let col = 0; col < 5; col++) {
+    for (let row = 0; row < 9; row++) {
+      for (let col = 0; col < 9; col++) {
         const tableIndex = getTableIndex(row, col, tables);
-        if (isCorner(row, col)) {
+        if (isEdge(row, col)) {
           gridItems.push(<div className={classes.gridItem}> </div>);
         } else if (tableIndex !== -1) {
           gridItems.push(

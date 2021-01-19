@@ -201,11 +201,11 @@ const EventRooms = (props) => {
                     </Typography> */}
                     <div className={classes.divider} />
                     <Grid container>
-                      <Grid item md={8} xs={12} className={classes.centerTableGrid}>
+                      <Grid item md={9} xs={12} className={classes.centerTableGrid}>
                         <TableGrid tables={eventRooms[currentEventRoom].meetingTables} />
                         <div className={classes.divider} />
                       </Grid>
-                      <Grid item md={4} xs={12}>
+                      <Grid item md={3} xs={12}>
                         <Typography variant="subtitle2">Scene: </Typography>
                         <Typography variant="body2">
                           {findScene(eventRooms[currentEventRoom].scene)}
