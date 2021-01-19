@@ -58,6 +58,11 @@ const scenes = [
     label: "Conference Hall",
     img: require(`../assets/img/scenes/ConferenceHall.jpg`).default,
   },
+  {
+    value: "LaboratoryHall",
+    label: "Laboratory Hall",
+    img: require(`../assets/img/scenes/LaboratoryHall.png`).default,
+  },
 ];
 
 const isBackgroundPreset = (value) => {
