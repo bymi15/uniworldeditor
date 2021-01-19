@@ -30,7 +30,7 @@ const EditEventRoom = (props) => {
   };
 
   const handleSubmit = async (data) => {
-    const id = props.location.state.eventRoom.id;
+    const id = props.location.state.eventRoom._id;
     if (validateEventRoom(data)) {
       try {
         const updatedEventRoom = await EventRoomService.update(id, data);
