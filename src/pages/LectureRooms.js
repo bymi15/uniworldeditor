@@ -19,19 +19,16 @@ import {
 import MuiAlert from "@material-ui/lab/Alert";
 import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows";
 import AddIcon from "@material-ui/icons/Add";
-import TableGrid from "../components/TableGrid";
-import EventRoomService from "../services/EventRoomService";
+import LectureRoomService from "../services/LectureRoomService";
 import { Link as RouterLink } from "react-router-dom";
 import { platformURL } from "../config";
 import { useReducerState } from "../utils/customHooks";
-import { findBackground, findScene, isBackgroundPreset } from "../utils/presets";
-import { getFileNameFromBlobUrl } from "../utils/blobs";
 
 const useStyles = makeStyles((theme) => ({
   mainSection: {
     paddingTop: theme.spacing(5),
   },
-  eventInfoPanel: {
+  lectureInfoPanel: {
     marginTop: theme.spacing(1),
     padding: theme.spacing(2),
   },
@@ -60,10 +57,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EventRooms = (props) => {
+const LectureRooms = (props) => {
   const classes = useStyles();
-  const [eventRooms, setEventRooms] = React.useState([]);
-  const [currentEventRoom, setCurrentEventRoom] = React.useState(0);
+  const [lectureRooms, setLectureRooms] = React.useState([]);
+  const [currentLectureRoom, setCurrentLectureRoom] = React.useState(0);
   const [isLoading, setLoading] = React.useState(false);
   const [alert, setAlert] = useReducerState({
     open: false,
@@ -81,43 +78,43 @@ const EventRooms = (props) => {
 
   React.useEffect(() => {
     if (props.location.state && props.location.state.created) {
-      showAlert("Successfully created event room.", "success");
+      showAlert("Successfully created lecture room.", "success");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.location.state]);
 
   React.useEffect(() => {
-    async function fetchEventRooms() {
+    async function fetchLectureRooms() {
       try {
         setLoading(true);
-        const data = await EventRoomService.getAll();
+        const data = await LectureRoomService.get();
         if (props.match.params.id) {
           for (let i = 0; i < data.length; i++) {
             if (data[i]._id === props.match.params.id) {
-              setCurrentEventRoom(i);
+              setCurrentLectureRoom(i);
               break;
             }
           }
         }
-        setEventRooms(data);
+        setLectureRooms(data);
       } catch (err) {
         console.log(err);
       }
       setLoading(false);
     }
-    fetchEventRooms();
+    fetchLectureRooms();
   }, [props]);
 
-  const handleClickEventRoom = (index) => {
-    setCurrentEventRoom(index);
+  const handleClickLectureRoom = (index) => {
+    setCurrentLectureRoom(index);
   };
 
   const handleClickRemove = async (id) => {
     if (window.confirm("Are you sure?")) {
       try {
-        await EventRoomService.delete(id);
-        setCurrentEventRoom(0);
-        setEventRooms(eventRooms.filter((eventRoom) => eventRoom._id !== id));
+        await LectureRoomService.delete(id);
+        setCurrentLectureRoom(0);
+        setLectureRooms(lectureRooms.filter((lectureRoom) => lectureRoom._id !== id));
       } catch (err) {
         console.log(err);
       }
@@ -125,10 +122,10 @@ const EventRooms = (props) => {
   };
 
   const handleClickEdit = (index) => {
-    console.log(eventRooms[index]);
+    console.log(lectureRooms[index]);
     props.history.push({
       pathname: "/edit",
-      state: { eventRoom: eventRooms[index] },
+      state: { lectureRoom: lectureRooms[index] },
     });
   };
 
@@ -144,7 +141,7 @@ const EventRooms = (props) => {
           {alert.message}
         </MuiAlert>
       </Snackbar>
-      <Typography variant="h4">Event Rooms</Typography>
+      <Typography variant="h4">Lecture Rooms</Typography>
       {isLoading ? (
         <div className={classes.progressLoader}>
           <CircularProgress />
@@ -152,7 +149,7 @@ const EventRooms = (props) => {
       ) : (
         <Grid container spacing={2}>
           <Grid item md={3} xs={12}>
-            <List component="nav" aria-label="event rooms">
+            <List component="nav" aria-label="lecture rooms">
               <ListItem
                 button
                 component={RouterLink}
@@ -163,23 +160,24 @@ const EventRooms = (props) => {
                   <AddIcon style={{ color: "#fff" }} />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Create event room"
+                  primary="Create lecture room"
                   primaryTypographyProps={{ noWrap: true }}
                 />
               </ListItem>
-              {eventRooms.length > 0 &&
-                eventRooms.map((eventRoom, index) => (
+              {lectureRooms.length > 0 &&
+                lectureRooms.map((lectureRoom, index) => (
                   <ListItem
-                    key={eventRoom._id}
+                    key={lectureRoom._id}
                     button
-                    selected={currentEventRoom === index}
-                    onClick={() => handleClickEventRoom(index)}
+                    selected={currentLectureRoom === index}
+                    onClick={() => handleClickLectureRoom(index)}
                   >
                     <ListItemIcon>
                       <DesktopWindowsIcon />
                     </ListItemIcon>
                     <ListItemText
-                      primary={eventRoom.title}
+                      primary={lectureRoom.title}
+                      secondary={lectureRoom.module}
                       primaryTypographyProps={{ noWrap: true }}
                     />
                   </ListItem>
@@ -187,71 +185,72 @@ const EventRooms = (props) => {
             </List>
           </Grid>
           <Grid item md={9} xs={12}>
-            <Card className={classes.eventInfoPanel}>
-              {eventRooms.length > 0 && !!eventRooms[currentEventRoom] ? (
+            <Card className={classes.lectureInfoPanel}>
+              {lectureRooms.length > 0 && !!lectureRooms[currentLectureRoom] ? (
                 <React.Fragment>
                   <CardContent>
                     <Typography color="textSecondary" gutterBottom>
-                      {moment(eventRooms[currentEventRoom].eventDate).format(
-                        "MMMM DD YYYY, h:mm a"
-                      )}
+                      {lectureRooms[currentLectureRoom].module}
                     </Typography>
                     <Typography variant="h5" component="h2">
-                      {eventRooms[currentEventRoom].title}
+                      {lectureRooms[currentLectureRoom].title}
                     </Typography>
-                    {/* <Typography color="textSecondary">
-                      Hosted by {eventRooms[currentEventRoom].host}
-                    </Typography> */}
-                    <div className={classes.divider} />
-                    <Grid container>
-                      <Grid item md={9} xs={12} className={classes.centerTableGrid}>
-                        <TableGrid tables={eventRooms[currentEventRoom].meetingTables} />
-                        <div className={classes.divider} />
-                      </Grid>
-                      <Grid item md={3} xs={12}>
-                        <Typography variant="subtitle2">Scene: </Typography>
-                        <Typography variant="body2">
-                          {findScene(eventRooms[currentEventRoom].scene)}
-                        </Typography>
-                        <div className={classes.divider} />
-                        <Typography variant="subtitle2">Background: </Typography>
-                        <Typography variant="body2">
-                          {isBackgroundPreset(eventRooms[currentEventRoom].background)
-                            ? findBackground(eventRooms[currentEventRoom].background)
-                            : getFileNameFromBlobUrl(eventRooms[currentEventRoom].background)}
-                        </Typography>
-                        <div className={classes.divider} />
-                        <Typography variant="subtitle2">Event Room URL: </Typography>
-                        <a
-                          href={`${platformURL}?id=${eventRooms[currentEventRoom]._id}`}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                        >
-                          <Typography variant="body2" noWrap>
-                            {platformURL}?id={eventRooms[currentEventRoom]._id}
-                          </Typography>
-                        </a>
-                        <Button
-                          className={classes.mt}
-                          variant="contained"
-                          color="primary"
-                          onClick={() => {
-                            navigator.clipboard.writeText(
-                              platformURL + "?id=" + eventRooms[currentEventRoom]._id
-                            );
-                          }}
-                        >
-                          Copy URL
-                        </Button>
-                      </Grid>
-                    </Grid>
                   </CardContent>
+                  <Grid container spacing={3}>
+                    <Grid item md={8} xs={12}>
+                      <img
+                        width="100%"
+                        alt="lecture preview"
+                        src={lectureRooms[currentLectureRoom].firstSlideUrl}
+                      />
+                    </Grid>
+                    <Grid item md={4} xs={12}>
+                      <Typography variant="subtitle2">Lecturer:</Typography>
+                      <Typography variant="body2" gutterBottom>
+                        {lectureRooms[currentLectureRoom].lecturer}
+                      </Typography>
+                      <div classname={classes.divider} />
+                      <Typography variant="subtitle2">Time:</Typography>
+                      <Typography variant="body2" gutterBottom>
+                        {moment(lectureRooms[currentLectureRoom].startTime).format("h:mm a")} -{" "}
+                        {moment(lectureRooms[currentLectureRoom].endTime).format("h:mm a")}
+                      </Typography>
+                      <div classname={classes.divider} />
+                      <Typography variant="subtitle2">Date:</Typography>
+                      <Typography variant="body2" gutterBottom>
+                        {moment(lectureRooms[currentLectureRoom].startTime).format("MMMM DD YYYY")}
+                      </Typography>
+                      <div classname={classes.divider} />
+                      <Typography variant="subtitle2">Lecture Room URL: </Typography>
+                      <a
+                        href={`${platformURL}?lid=${lectureRooms[currentLectureRoom]._id}`}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        <Typography variant="body2" noWrap>
+                          {platformURL}?lid={lectureRooms[currentLectureRoom]._id}
+                        </Typography>
+                      </a>
+                      <Button
+                        className={classes.mt}
+                        variant="contained"
+                        color="primary"
+                        onClick={() => {
+                          navigator.clipboard.writeText(
+                            platformURL + "?lid=" + lectureRooms[currentLectureRoom]._id
+                          );
+                        }}
+                      >
+                        Copy URL
+                      </Button>
+                    </Grid>
+                  </Grid>
                   <CardActions>
                     <Button
                       color="primary"
                       variant="outlined"
                       onClick={() => {
-                        handleClickEdit(currentEventRoom);
+                        handleClickEdit(currentLectureRoom);
                       }}
                     >
                       Edit
@@ -260,7 +259,7 @@ const EventRooms = (props) => {
                       color="secondary"
                       variant="outlined"
                       onClick={() => {
-                        handleClickRemove(eventRooms[currentEventRoom]._id);
+                        handleClickRemove(lectureRooms[currentLectureRoom]._id);
                       }}
                     >
                       Remove
@@ -269,7 +268,7 @@ const EventRooms = (props) => {
                 </React.Fragment>
               ) : (
                 <Typography color="textSecondary" gutterBottom>
-                  Create an event room
+                  Create lecture room
                 </Typography>
               )}
             </Card>
@@ -280,4 +279,4 @@ const EventRooms = (props) => {
   );
 };
 
-export default EventRooms;
+export default LectureRooms;

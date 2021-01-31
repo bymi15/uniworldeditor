@@ -31,6 +31,9 @@ const Navbar = () => {
         <Button color="inherit" component={RouterLink} to="/eventrooms">
           Event Rooms
         </Button>
+        <Button color="inherit" component={RouterLink} to="/lecturerooms">
+          Lecture Rooms
+        </Button>
       </Toolbar>
     </AppBar>
   );
