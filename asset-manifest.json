@@ -1,15 +1,18 @@
 {
   "files": {
-    "main.js": "/uniworldeditor/static/js/main.d1d9c814.chunk.js",
-    "main.js.map": "/uniworldeditor/static/js/main.d1d9c814.chunk.js.map",
-    "runtime-main.js": "/uniworldeditor/static/js/runtime-main.5b2209f5.js",
-    "runtime-main.js.map": "/uniworldeditor/static/js/runtime-main.5b2209f5.js.map",
-    "static/js/2.9ae7e026.chunk.js": "/uniworldeditor/static/js/2.9ae7e026.chunk.js",
-    "static/js/2.9ae7e026.chunk.js.map": "/uniworldeditor/static/js/2.9ae7e026.chunk.js.map",
-    "static/js/3.79f53140.chunk.js": "/uniworldeditor/static/js/3.79f53140.chunk.js",
-    "static/js/3.79f53140.chunk.js.map": "/uniworldeditor/static/js/3.79f53140.chunk.js.map",
+    "main.js": "/uniworldeditor/static/js/main.fc9f9318.chunk.js",
+    "main.js.map": "/uniworldeditor/static/js/main.fc9f9318.chunk.js.map",
+    "runtime-main.js": "/uniworldeditor/static/js/runtime-main.083fa709.js",
+    "runtime-main.js.map": "/uniworldeditor/static/js/runtime-main.083fa709.js.map",
+    "static/js/2.d5a4ce83.chunk.js": "/uniworldeditor/static/js/2.d5a4ce83.chunk.js",
+    "static/js/2.d5a4ce83.chunk.js.map": "/uniworldeditor/static/js/2.d5a4ce83.chunk.js.map",
+    "static/js/3.8043c3c1.chunk.js": "/uniworldeditor/static/js/3.8043c3c1.chunk.js",
+    "static/js/3.8043c3c1.chunk.js.map": "/uniworldeditor/static/js/3.8043c3c1.chunk.js.map",
     "index.html": "/uniworldeditor/index.html",
-    "static/js/2.9ae7e026.chunk.js.LICENSE.txt": "/uniworldeditor/static/js/2.9ae7e026.chunk.js.LICENSE.txt",
+    "static/js/2.d5a4ce83.chunk.js.LICENSE.txt": "/uniworldeditor/static/js/2.d5a4ce83.chunk.js.LICENSE.txt",
+    "static/js/pdf.worker.d157f1bd.worker.js": "/uniworldeditor/static/js/pdf.worker.d157f1bd.worker.js",
+    "static/js/pdf.worker.d157f1bd.worker.js.LICENSE.txt": "/uniworldeditor/static/js/pdf.worker.d157f1bd.worker.js.LICENSE.txt",
+    "static/js/pdf.worker.d157f1bd.worker.js.map": "/uniworldeditor/static/js/pdf.worker.d157f1bd.worker.js.map",
     "static/media/BritishLibraryOutside.jpg": "/uniworldeditor/static/media/BritishLibraryOutside.457acb01.jpg",
     "static/media/BritishMuseumOutside.jpg": "/uniworldeditor/static/media/BritishMuseumOutside.211553f5.jpg",
     "static/media/ConferenceHall.jpg": "/uniworldeditor/static/media/ConferenceHall.dcbdd376.jpg",
@@ -25,8 +28,8 @@
     "static/media/uniworldscreenshot.52053eda.png": "/uniworldeditor/static/media/uniworldscreenshot.52053eda.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.5b2209f5.js",
-    "static/js/2.9ae7e026.chunk.js",
-    "static/js/main.d1d9c814.chunk.js"
+    "static/js/runtime-main.083fa709.js",
+    "static/js/2.d5a4ce83.chunk.js",
+    "static/js/main.fc9f9318.chunk.js"
   ]
 }
