@@ -212,7 +212,7 @@ const TableDialog = ({ open, onClose, onSubmit, updateTable }) => {
                 />
               )}
             />
-            <FileUpload name="uploadLogo" onChange={handleUpload}>
+            <FileUpload name="uploadLogo" onChange={handleUpload} accept="image/*">
               Upload Logo
             </FileUpload>
           </Grid>

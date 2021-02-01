@@ -10,4 +10,16 @@ const validateEventRoom = (eventRoom) => {
   );
 };
 
-export { validateEventRoom };
+const validateLectureRoom = (lectureRoom) => {
+  return (
+    lectureRoom.title &&
+    lectureRoom.module &&
+    lectureRoom.lecturer &&
+    lectureRoom.firstSlideUrl &&
+    Number.isInteger(lectureRoom.numSlides) &&
+    moment(lectureRoom.startTime).isValid() &&
+    moment(lectureRoom.endTime).isValid()
+  );
+};
+
+export { validateEventRoom, validateLectureRoom };

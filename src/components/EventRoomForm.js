@@ -257,6 +257,7 @@ const EventRoomForm = ({ onSubmit, submitText, updateEventRoom }) => {
                         name="backgroundUpload"
                         onChange={handleUploadBackground}
                         width="120px"
+                        accept="image/*"
                       >
                         Upload
                       </FileUpload>

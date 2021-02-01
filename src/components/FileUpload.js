@@ -27,11 +27,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FileUpload = ({ name, onChange, width, children }) => {
+const FileUpload = ({ name, onChange, width, children, accept }) => {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <input type="file" id={name} name={name} className={classes.fileUpload} onChange={onChange} />
+      <input
+        type="file"
+        id={name}
+        name={name}
+        className={classes.fileUpload}
+        onChange={onChange}
+        accept={accept}
+      />
       <label for={name} className={classes.fileUploadLabel} style={width && { width: width }}>
         <PublishIcon fontSize="small" style={{ paddingTop: "4px" }} />
         {children}

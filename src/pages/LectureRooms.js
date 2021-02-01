@@ -153,7 +153,7 @@ const LectureRooms = (props) => {
               <ListItem
                 button
                 component={RouterLink}
-                to="/create"
+                to="/createlectureroom"
                 className={classes.listItemCreate}
               >
                 <ListItemIcon>
