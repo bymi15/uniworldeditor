@@ -234,7 +234,17 @@ const EventRoomForm = ({ onSubmit, submitText, updateEventRoom }) => {
                         className={classes.padRight}
                         disableClearable
                         options={backgrounds}
-                        groupBy={(option) => (isBackgroundPreset(option) ? "Preset" : "Custom")}
+                        groupBy={(option) => {
+                          if (isBackgroundPreset(option)) {
+                            if (option.startsWith("Videos/")) {
+                              return "Preset (360° Videos)";
+                            } else {
+                              return "Preset (360° Images)";
+                            }
+                          } else {
+                            return "Custom";
+                          }
+                        }}
                         getOptionLabel={(option) =>
                           isBackgroundPreset(option)
                             ? findBackground(option)

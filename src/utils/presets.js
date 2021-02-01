@@ -45,6 +45,21 @@ const backgrounds = [
     label: "Eiffel Tower Sunset",
     img: require(`../assets/img/backgrounds/EiffelTowerSunset.jpg`).default,
   },
+  {
+    value: "Videos/Plaza",
+    label: "Plaza (Video)",
+    img: require(`../assets/img/backgrounds/videos/Plaza.png`).default,
+  },
+  {
+    value: "Videos/UclTour",
+    label: "UCL Tour (Video)",
+    img: require(`../assets/img/backgrounds/videos/UclTour.png`).default,
+  },
+  {
+    value: "Videos/Waterfront",
+    label: "Waterfront (Video)",
+    img: require(`../assets/img/backgrounds/videos/Waterfront.png`).default,
+  },
 ];
 
 const scenes = [
