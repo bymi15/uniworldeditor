@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/uniworldeditor/static/js/main.fc9f9318.chunk.js",
-    "main.js.map": "/uniworldeditor/static/js/main.fc9f9318.chunk.js.map",
-    "runtime-main.js": "/uniworldeditor/static/js/runtime-main.083fa709.js",
-    "runtime-main.js.map": "/uniworldeditor/static/js/runtime-main.083fa709.js.map",
-    "static/js/2.d5a4ce83.chunk.js": "/uniworldeditor/static/js/2.d5a4ce83.chunk.js",
-    "static/js/2.d5a4ce83.chunk.js.map": "/uniworldeditor/static/js/2.d5a4ce83.chunk.js.map",
-    "static/js/3.8043c3c1.chunk.js": "/uniworldeditor/static/js/3.8043c3c1.chunk.js",
-    "static/js/3.8043c3c1.chunk.js.map": "/uniworldeditor/static/js/3.8043c3c1.chunk.js.map",
+    "main.js": "/uniworldeditor/static/js/main.6b1ebd1d.chunk.js",
+    "main.js.map": "/uniworldeditor/static/js/main.6b1ebd1d.chunk.js.map",
+    "runtime-main.js": "/uniworldeditor/static/js/runtime-main.e604ae16.js",
+    "runtime-main.js.map": "/uniworldeditor/static/js/runtime-main.e604ae16.js.map",
+    "static/js/2.ed4e77cf.chunk.js": "/uniworldeditor/static/js/2.ed4e77cf.chunk.js",
+    "static/js/2.ed4e77cf.chunk.js.map": "/uniworldeditor/static/js/2.ed4e77cf.chunk.js.map",
+    "static/js/3.e44a9aae.chunk.js": "/uniworldeditor/static/js/3.e44a9aae.chunk.js",
+    "static/js/3.e44a9aae.chunk.js.map": "/uniworldeditor/static/js/3.e44a9aae.chunk.js.map",
     "index.html": "/uniworldeditor/index.html",
-    "static/js/2.d5a4ce83.chunk.js.LICENSE.txt": "/uniworldeditor/static/js/2.d5a4ce83.chunk.js.LICENSE.txt",
+    "static/js/2.ed4e77cf.chunk.js.LICENSE.txt": "/uniworldeditor/static/js/2.ed4e77cf.chunk.js.LICENSE.txt",
     "static/js/pdf.worker.d157f1bd.worker.js": "/uniworldeditor/static/js/pdf.worker.d157f1bd.worker.js",
     "static/js/pdf.worker.d157f1bd.worker.js.LICENSE.txt": "/uniworldeditor/static/js/pdf.worker.d157f1bd.worker.js.LICENSE.txt",
     "static/js/pdf.worker.d157f1bd.worker.js.map": "/uniworldeditor/static/js/pdf.worker.d157f1bd.worker.js.map",
@@ -20,16 +20,19 @@
     "static/media/EiffelTowerSunset.jpg": "/uniworldeditor/static/media/EiffelTowerSunset.6fade2bd.jpg",
     "static/media/Hall.jpg": "/uniworldeditor/static/media/Hall.ca876dfa.jpg",
     "static/media/LaboratoryHall.png": "/uniworldeditor/static/media/LaboratoryHall.d575bc6d.png",
+    "static/media/Plaza.png": "/uniworldeditor/static/media/Plaza.d6253f0b.png",
     "static/media/RoyalOperaHouse.jpg": "/uniworldeditor/static/media/RoyalOperaHouse.46a37390.jpg",
     "static/media/SydneyOperaHouseOutside.jpg": "/uniworldeditor/static/media/SydneyOperaHouseOutside.f11f7b5a.jpg",
     "static/media/TimesSquareNewYork.jpg": "/uniworldeditor/static/media/TimesSquareNewYork.318c884b.jpg",
     "static/media/UclMainQuad.jpg": "/uniworldeditor/static/media/UclMainQuad.89df5f69.jpg",
     "static/media/UclPrintRoomCafe.jpg": "/uniworldeditor/static/media/UclPrintRoomCafe.9592a09e.jpg",
+    "static/media/UclTour.png": "/uniworldeditor/static/media/UclTour.e48bf224.png",
+    "static/media/Waterfront.png": "/uniworldeditor/static/media/Waterfront.edc92b86.png",
     "static/media/uniworldscreenshot.52053eda.png": "/uniworldeditor/static/media/uniworldscreenshot.52053eda.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.083fa709.js",
-    "static/js/2.d5a4ce83.chunk.js",
-    "static/js/main.fc9f9318.chunk.js"
+    "static/js/runtime-main.e604ae16.js",
+    "static/js/2.ed4e77cf.chunk.js",
+    "static/js/main.6b1ebd1d.chunk.js"
   ]
 }
