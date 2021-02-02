@@ -9,6 +9,7 @@ import CreateEventRoom from "./pages/CreateEventRoom";
 import EditEventRoom from "./pages/EditEventRoom";
 import LectureRooms from "./pages/LectureRooms";
 import CreateLectureRoom from "./pages/CreateLectureRoom";
+import EditLectureRoom from "./pages/EditLectureRoom";
 
 const App = () => (
   <ThemeProvider theme={theme}>
@@ -83,6 +84,15 @@ const App = () => (
           render={(props) => (
             <Layout>
               <CreateLectureRoom {...props} />
+            </Layout>
+          )}
+        />
+        <Route
+          exact
+          path="/editlectureroom"
+          render={(props) => (
+            <Layout>
+              <EditLectureRoom {...props} />
             </Layout>
           )}
         />

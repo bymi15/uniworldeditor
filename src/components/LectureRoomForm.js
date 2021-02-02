@@ -169,9 +169,8 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
                     <KeyboardDateTimePicker
                       fullWidth
                       disabled={isLoading}
-                      autoOk
-                      disableToolbar
-                      variant="inline"
+                      disablePast
+                      showTodayButton
                       format="h:mm a - YYYY/MM/DD"
                       margin="normal"
                       id="startTime"
@@ -189,9 +188,8 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
                     <KeyboardDateTimePicker
                       fullWidth
                       disabled={isLoading}
-                      autoOk
-                      disableToolbar
-                      variant="inline"
+                      disablePast
+                      showTodayButton
                       format="h:mm a - YYYY/MM/DD"
                       margin="normal"
                       id="endTime"
@@ -214,7 +212,7 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
                       name="firstSlideurl"
                       label="Lecture Slides"
                       placeholder="Upload lecture slides in a PDF format"
-                      value={file ? file.name : ""}
+                      value={file ? file.name : lectureRoom.firstSlideUrl || ""}
                       onChange={() => {}}
                       InputLabelProps={{
                         shrink: true,
@@ -240,6 +238,7 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
                     alt="Slide Preview"
                     src={
                       previewImage ||
+                      lectureRoom.firstSlideUrl ||
                       "https://via.placeholder.com/700x500.png?text=Placeholder+Slide"
                     }
                   />

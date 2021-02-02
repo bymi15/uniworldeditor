@@ -236,7 +236,7 @@ const EventRoomForm = ({ onSubmit, submitText, updateEventRoom }) => {
                         options={backgrounds}
                         groupBy={(option) => {
                           if (isBackgroundPreset(option)) {
-                            if (option.startsWith("Videos/")) {
+                            if (option.endsWith(".mp4")) {
                               return "Preset (360° Videos)";
                             } else {
                               return "Preset (360° Images)";

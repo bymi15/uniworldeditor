@@ -23,6 +23,8 @@ import LectureRoomService from "../services/LectureRoomService";
 import { Link as RouterLink } from "react-router-dom";
 import { platformURL } from "../config";
 import { useReducerState } from "../utils/customHooks";
+import BlobService from "../services/BlobService";
+import { getFileName } from "../utils/blobs";
 
 const useStyles = makeStyles((theme) => ({
   mainSection: {
@@ -109,12 +111,18 @@ const LectureRooms = (props) => {
     setCurrentLectureRoom(index);
   };
 
-  const handleClickRemove = async (id) => {
+  const handleClickRemove = async (lectureRoomToDelete) => {
     if (window.confirm("Are you sure?")) {
       try {
-        await LectureRoomService.delete(id);
+        await BlobService.deleteSlides(
+          getFileName(lectureRoomToDelete.firstSlideUrl),
+          lectureRoomToDelete.numSlides
+        );
+        await LectureRoomService.delete(lectureRoomToDelete._id);
         setCurrentLectureRoom(0);
-        setLectureRooms(lectureRooms.filter((lectureRoom) => lectureRoom._id !== id));
+        setLectureRooms(
+          lectureRooms.filter((lectureRoom) => lectureRoom._id !== lectureRoomToDelete._id)
+        );
       } catch (err) {
         console.log(err);
       }
@@ -124,7 +132,7 @@ const LectureRooms = (props) => {
   const handleClickEdit = (index) => {
     console.log(lectureRooms[index]);
     props.history.push({
-      pathname: "/edit",
+      pathname: "/editlectureroom",
       state: { lectureRoom: lectureRooms[index] },
     });
   };
@@ -259,7 +267,7 @@ const LectureRooms = (props) => {
                       color="secondary"
                       variant="outlined"
                       onClick={() => {
-                        handleClickRemove(lectureRooms[currentLectureRoom]._id);
+                        handleClickRemove(lectureRooms[currentLectureRoom]);
                       }}
                     >
                       Remove

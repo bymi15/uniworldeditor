@@ -46,18 +46,18 @@ const backgrounds = [
     img: require(`../assets/img/backgrounds/EiffelTowerSunset.jpg`).default,
   },
   {
-    value: "Videos/Plaza",
-    label: "Plaza (Video)",
+    value: "Plaza.mp4",
+    label: "Plaza Video",
     img: require(`../assets/img/backgrounds/videos/Plaza.png`).default,
   },
   {
-    value: "Videos/UclTour",
-    label: "UCL Tour (Video)",
+    value: "UclTour.mp4",
+    label: "UCL Tour Video",
     img: require(`../assets/img/backgrounds/videos/UclTour.png`).default,
   },
   {
-    value: "Videos/Waterfront",
-    label: "Waterfront (Video)",
+    value: "Waterfront.mp4",
+    label: "Waterfront Video",
     img: require(`../assets/img/backgrounds/videos/Waterfront.png`).default,
   },
 ];

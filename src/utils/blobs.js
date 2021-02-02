@@ -8,4 +8,8 @@ const getSlideNameFromBlobUrl = (url) => {
   return url.substring(url.lastIndexOf("/") + 38, url.lastIndexOf("_"));
 };
 
-export { getFileNameFromBlobUrl, getSlideNameFromBlobUrl };
+const getFileName = (url) => {
+  return url.substring(url.lastIndexOf("/") + 1);
+};
+
+export { getFileNameFromBlobUrl, getSlideNameFromBlobUrl, getFileName };
