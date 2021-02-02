@@ -110,9 +110,12 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
 
   const handleClickSubmit = async () => {
     setLoading(true);
-    const { numSlides, formData } = await convertPdfToImages(file);
-    const slide = await BlobService.upload(formData, "slides");
-    const data = { ...lectureRoom, numSlides, firstSlideUrl: slide };
+    let data = { ...lectureRoom };
+    if (file) {
+      const { numSlides, formData } = await convertPdfToImages(file);
+      const slide = await BlobService.upload(formData, "slides");
+      data = { ...data, numSlides, firstSlideUrl: slide };
+    }
     await onSubmit(data);
     setLectureRoom(lectureRoomInitialState);
     setLoading(false);
