@@ -46,17 +46,17 @@ const backgrounds = [
     img: require(`../assets/img/backgrounds/EiffelTowerSunset.jpg`).default,
   },
   {
-    value: "Plaza.mp4",
+    value: "https://uniworldstorage.blob.core.windows.net/videos/Plaza.mp4",
     label: "Plaza Video",
     img: require(`../assets/img/backgrounds/videos/Plaza.png`).default,
   },
   {
-    value: "UclTour.mp4",
+    value: "https://uniworldstorage.blob.core.windows.net/videos/UclTour.mp4",
     label: "UCL Tour Video",
     img: require(`../assets/img/backgrounds/videos/UclTour.png`).default,
   },
   {
-    value: "Waterfront.mp4",
+    value: "https://uniworldstorage.blob.core.windows.net/videos/Waterfront.mp4",
     label: "Waterfront Video",
     img: require(`../assets/img/backgrounds/videos/Waterfront.png`).default,
   },
