@@ -2,8 +2,8 @@ const mockLectureRoom = {
   title: 'mockTitle',
   module: 'mockModule',
   lecturer: 'mockLecturer',
-  startTime: new Date().toISOString(),
-  endTime: new Date().toISOString(),
+  startTime: 'mockStartTime',
+  endTime: 'mockEndTime',
   firstSlideUrl: 'mockUrl',
   numSlides: 1,
 };
@@ -12,8 +12,8 @@ const mockLectureRoomUpdate = {
   title: 'newMockTitle',
   module: 'newMockModule',
   lecturer: 'newMockLecturer',
-  startTime: new Date().toISOString(),
-  endTime: new Date().toISOString(),
+  startTime: 'newMockStartTime',
+  endTime: 'newMockEndTime',
   firstSlideUrl: 'newMockUrl',
   numSlides: 3,
 };

@@ -99,7 +99,7 @@ exports[`LectureRoomForm test LectureRoomForm should match snapshot 1`] = `
                 orientation="portrait"
                 showTabs={true}
                 showTodayButton={true}
-                value="2021-03-10T22:12:36.135Z"
+                value="2021-03-10T22:31:05.303Z"
                 views={
                   Array [
                     "year",
@@ -139,7 +139,7 @@ exports[`LectureRoomForm test LectureRoomForm should match snapshot 1`] = `
                 orientation="portrait"
                 showTabs={true}
                 showTodayButton={true}
-                value="2021-03-10T22:12:36.135Z"
+                value="2021-03-10T22:31:05.304Z"
                 views={
                   Array [
                     "year",

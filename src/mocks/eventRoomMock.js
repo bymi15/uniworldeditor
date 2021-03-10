@@ -1,6 +1,6 @@
 const mockEventRoom = {
   title: 'mockTitle',
-  eventDate: new Date().toISOString(),
+  eventDate: 'mockDate',
   meetingTables: [],
   background: 'mockBackground',
   scene: 'mockScene',
@@ -8,7 +8,7 @@ const mockEventRoom = {
 
 const mockEventRoomUpdate = {
   title: 'newMockTitle',
-  eventDate: new Date().toISOString(),
+  eventDate: 'newMockDate',
   meetingTables: [],
   background: 'newMockBackground',
   scene: 'newMockScene',
