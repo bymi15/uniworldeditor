@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { UpdateLectureRoomPropType } from '../propTypes/LectureRoom';
+import { mockLectureRoomUpdate } from '../mocks/lectureRoomMock';
 import React from 'react';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
@@ -289,6 +290,10 @@ LectureRoomForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   submitText: PropTypes.string.isRequired,
   updateLectureRoom: UpdateLectureRoomPropType,
+};
+
+LectureRoomForm.defaultProps = {
+  updateLectureRoom: mockLectureRoomUpdate,
 };
 
 export default LectureRoomForm;

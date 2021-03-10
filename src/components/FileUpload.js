@@ -56,7 +56,7 @@ FileUpload.propTypes = {
   children: PropTypes.node,
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  width: PropTypes.number,
+  width: PropTypes.string,
   accept: PropTypes.string,
 };
 

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import { MeetingTablePropType } from '../propTypes/EventRoom';
+import { MeetingTablePropType } from '../propTypes/eventRoom';
+import { mockMeetingTable } from '../mocks/eventRoomMock';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Avatar } from '@material-ui/core';
@@ -139,7 +140,11 @@ const TableGridEditor = ({ tables, updateMeetingTables }) => {
 
 TableGridEditor.propTypes = {
   tables: PropTypes.arrayOf(MeetingTablePropType).isRequired,
-  updateMeetingTables: PropTypes.func.isRequired,
+  updateMeetingTables: PropTypes.func,
+};
+
+TableGridEditor.defaultProps = {
+  updateMeetingTables: () => {},
 };
 
 export default TableGridEditor;

@@ -7,12 +7,12 @@ const MeetingTablePropType = PropTypes.shape({
   zoomUrl: PropTypes.string.isRequired,
   posX: PropTypes.number.isRequired,
   posY: PropTypes.number.isRequired,
-}).isRequired;
+});
 
 const EventRoomPropType = PropTypes.shape({
   title: PropTypes.string.isRequired,
   eventDate: PropTypes.string.isRequired,
-  meetingTables: PropTypes.arrayOf(MeetingTablePropType).isRequired,
+  meetingTables: PropTypes.arrayOf(MeetingTablePropType.isRequired).isRequired,
   background: PropTypes.string.isRequired,
   scene: PropTypes.string.isRequired,
 });
