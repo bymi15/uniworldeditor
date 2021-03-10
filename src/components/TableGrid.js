@@ -1,32 +1,34 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Avatar } from "@material-ui/core";
-import { isEdge, getTableIndex, getTableImage } from "../utils/tableUtils";
+import PropTypes from 'prop-types';
+import { MeetingTablePropType } from '../propTypes/EventRoom';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Avatar } from '@material-ui/core';
+import { isEdge, getTableIndex, getTableImage } from '../utils/tableUtils';
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
-    display: "grid",
-    gridGap: "5px",
-    gridTemplateColumns: "repeat(9, 50px)",
-    gridTemplateRows: "repeat(9, 50px)",
-    [theme.breakpoints.down("xs")]: {
-      gridTemplateColumns: "repeat(9, 36px)",
-      gridTemplateRows: "repeat(9, 36px)",
+    display: 'grid',
+    gridGap: '5px',
+    gridTemplateColumns: 'repeat(9, 50px)',
+    gridTemplateRows: 'repeat(9, 50px)',
+    [theme.breakpoints.down('xs')]: {
+      gridTemplateColumns: 'repeat(9, 36px)',
+      gridTemplateRows: 'repeat(9, 36px)',
     },
-    gridAutoFlow: "row",
+    gridAutoFlow: 'row',
   },
   gridItem: {
-    display: "flex",
-    textAlign: "center",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    textAlign: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   gridItemFill: {
-    transition: "background 0.3s ease",
-    "&:hover": {
-      background: "#aaa",
+    transition: 'background 0.3s ease',
+    '&:hover': {
+      background: '#aaa',
     },
-    background: "#ccc",
+    background: '#ccc',
   },
 }));
 
@@ -42,12 +44,19 @@ const TableGrid = ({ tables }) => {
           gridItems.push(<div className={classes.gridItem}> </div>);
         } else if (tableIndex !== -1) {
           gridItems.push(
-            <div id={tableIndex} className={`${classes.gridItem} ${classes.gridItemFill}`}>
+            <div
+              id={tableIndex}
+              className={`${classes.gridItem} ${classes.gridItemFill}`}
+            >
               <Avatar src={getTableImage(tables[tableIndex].type)} />
             </div>
           );
         } else {
-          gridItems.push(<div className={`${classes.gridItem} ${classes.gridItemFill}`}> </div>);
+          gridItems.push(
+            <div className={`${classes.gridItem} ${classes.gridItemFill}`}>
+               
+            </div>
+          );
         }
       }
     }
@@ -63,6 +72,10 @@ const TableGrid = ({ tables }) => {
       </div>
     </React.Fragment>
   );
+};
+
+TableGrid.propTypes = {
+  tables: PropTypes.arrayOf(MeetingTablePropType).isRequired,
 };
 
 export default TableGrid;
