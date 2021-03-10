@@ -1,23 +1,23 @@
-import React from "react";
-import { Redirect, BrowserRouter, Route, Switch } from "react-router-dom";
-import { ThemeProvider } from "@material-ui/core/styles";
-import theme from "./theme";
-import Layout from "./components/Layout";
-import Home from "./pages/Home";
-import EventRooms from "./pages/EventRooms";
-import CreateEventRoom from "./pages/CreateEventRoom";
-import EditEventRoom from "./pages/EditEventRoom";
-import LectureRooms from "./pages/LectureRooms";
-import CreateLectureRoom from "./pages/CreateLectureRoom";
-import EditLectureRoom from "./pages/EditLectureRoom";
+import React from 'react';
+import { Redirect, BrowserRouter, Route, Switch } from 'react-router-dom';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from './theme';
+import Layout from './components/Layout';
+import Home from './views/Home';
+import EventRooms from './views/EventRooms';
+import CreateEventRoom from './views/CreateEventRoom';
+import EditEventRoom from './views/EditEventRoom';
+import LectureRooms from './views/LectureRooms';
+import CreateLectureRoom from './views/CreateLectureRoom';
+import EditLectureRoom from './views/EditLectureRoom';
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <BrowserRouter basename="/uniworldeditor">
+    <BrowserRouter basename='/uniworldeditor'>
       <Switch>
         <Route
           exact
-          path="/"
+          path='/'
           render={(props) => (
             <Layout>
               <Home {...props} />
@@ -26,7 +26,7 @@ const App = () => (
         />
         <Route
           exact
-          path="/eventrooms"
+          path='/eventrooms'
           render={(props) => (
             <Layout>
               <EventRooms {...props} />
@@ -35,7 +35,7 @@ const App = () => (
         />
         <Route
           exact
-          path="/eventrooms/:id"
+          path='/eventrooms/:id'
           render={(props) => (
             <Layout>
               <EventRooms {...props} />
@@ -44,7 +44,7 @@ const App = () => (
         />
         <Route
           exact
-          path="/create"
+          path='/create'
           render={(props) => (
             <Layout>
               <CreateEventRoom {...props} />
@@ -53,7 +53,7 @@ const App = () => (
         />
         <Route
           exact
-          path="/edit"
+          path='/edit'
           render={(props) => (
             <Layout>
               <EditEventRoom {...props} />
@@ -62,7 +62,7 @@ const App = () => (
         />
         <Route
           exact
-          path="/lecturerooms"
+          path='/lecturerooms'
           render={(props) => (
             <Layout>
               <LectureRooms {...props} />
@@ -71,7 +71,7 @@ const App = () => (
         />
         <Route
           exact
-          path="/lecturerooms/:id"
+          path='/lecturerooms/:id'
           render={(props) => (
             <Layout>
               <LectureRooms {...props} />
@@ -80,7 +80,7 @@ const App = () => (
         />
         <Route
           exact
-          path="/createlectureroom"
+          path='/createlectureroom'
           render={(props) => (
             <Layout>
               <CreateLectureRoom {...props} />
@@ -89,14 +89,14 @@ const App = () => (
         />
         <Route
           exact
-          path="/editlectureroom"
+          path='/editlectureroom'
           render={(props) => (
             <Layout>
               <EditLectureRoom {...props} />
             </Layout>
           )}
         />
-        <Redirect to="/" />
+        <Redirect to='/' />
       </Switch>
     </BrowserRouter>
   </ThemeProvider>
