@@ -1,4 +1,4 @@
-const backgrounds = [
+export const backgrounds = [
   {
     value: 'Default',
     label: 'Default',
@@ -68,7 +68,7 @@ const backgrounds = [
   },
 ];
 
-const scenes = [
+export const scenes = [
   {
     value: 'Default',
     label: 'Default',
@@ -86,13 +86,13 @@ const scenes = [
   },
 ];
 
-const isBackgroundPreset = (value) => {
+export const isBackgroundPreset = (value) => {
   return backgrounds.find((background) => background.value === value)
     ? true
     : false;
 };
 
-const findBackground = (value) => {
+export const findBackground = (value) => {
   const res = backgrounds.find((background) => background.value === value);
   if (res) {
     return res.label;
@@ -100,7 +100,7 @@ const findBackground = (value) => {
   return value;
 };
 
-const findBackgroundThumbnail = (value) => {
+export const findBackgroundThumbnail = (value) => {
   const res = backgrounds.find((background) => background.value === value);
   if (res) {
     return res.img;
@@ -108,7 +108,7 @@ const findBackgroundThumbnail = (value) => {
   return 'https://via.placeholder.com/150';
 };
 
-const findScene = (value) => {
+export const findScene = (value) => {
   const res = scenes.find((scene) => scene.value === value);
   if (res) {
     return res.label;
@@ -116,20 +116,10 @@ const findScene = (value) => {
   return value;
 };
 
-const findSceneThumbnail = (value) => {
+export const findSceneThumbnail = (value) => {
   const res = scenes.find((scene) => scene.value === value);
   if (res) {
     return res.img;
   }
   return 'https://via.placeholder.com/150';
-};
-
-export {
-  backgrounds,
-  scenes,
-  findBackground,
-  findScene,
-  findBackgroundThumbnail,
-  findSceneThumbnail,
-  isBackgroundPreset,
 };

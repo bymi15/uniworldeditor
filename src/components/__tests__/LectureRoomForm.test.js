@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import LectureRoomForm from '../LectureRoomForm';
-import { mockLectureRoomUpdate } from '../../mocks/lectureRoomMock';
+import { mockLectureRoomUpdate } from '../../mockData/lectureRoomMock';
 
 describe('LectureRoomForm test', () => {
   it('LectureRoomForm should match snapshot', () => {

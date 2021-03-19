@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { MeetingTablePropType } from '../propTypes/eventRoom';
-import { mockMeetingTable } from '../mocks/eventRoomMock';
+import { mockMeetingTable } from '../mockData/eventRoomMock';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Button, Avatar } from '@material-ui/core';

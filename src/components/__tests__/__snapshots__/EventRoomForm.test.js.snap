@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`EventRoomForm test EventRoomForm should match snapshot 1`] = `
+exports[`EventRoomForm test should match snapshot 1`] = `
 <WithStyles(ForwardRef(Grid))
   container={true}
   spacing={2}
@@ -62,7 +62,7 @@ exports[`EventRoomForm test EventRoomForm should match snapshot 1`] = `
                 minDateMessage="Date should not be before minimal date"
                 onChange={[Function]}
                 openTo="date"
-                value="2021-03-10T22:31:05.442Z"
+                value="2021-03-18T01:03:12.275Z"
                 variant="inline"
                 views={
                   Array [

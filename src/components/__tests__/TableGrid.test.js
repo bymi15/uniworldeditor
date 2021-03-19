@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import TableGrid from '../TableGrid';
-import { mockMeetingTable } from '../../mocks/eventRoomMock';
+import { mockMeetingTable } from '../../mockData/eventRoomMock';
 
 describe('TableGrid test', () => {
   it('TableGrid should match snapshot', () => {

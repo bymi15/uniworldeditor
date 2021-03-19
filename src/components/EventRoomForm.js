@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { UpdateEventRoomPropType } from '../propTypes/eventRoom';
-import { mockEventRoomUpdate } from '../mocks/eventRoomMock';
+import { mockEventRoomUpdate } from '../mockData/eventRoomMock';
 import React from 'react';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
@@ -35,6 +35,7 @@ import {
 } from '../utils/presets';
 import { getFileNameFromBlobUrl } from '../utils/blobs';
 import BlobService from '../services/BlobService';
+import _ from 'lodash';
 
 const useStyles = makeStyles((theme) => ({
   eventInfoPanel: {
@@ -102,15 +103,16 @@ const EventRoomForm = ({ onSubmit, submitText, updateEventRoom }) => {
   const [backgrounds, setBackgrounds] = React.useState([]);
 
   React.useEffect(() => {
-    if (updateEventRoom !== undefined) {
+    if (!_.isEmpty(updateEventRoom) && !_.isEqual(eventRoom, updateEventRoom)) {
       setEventRoom(updateEventRoom);
     }
-  }, [updateEventRoom, setEventRoom]);
+  }, [updateEventRoom, setEventRoom, eventRoom]);
 
   React.useEffect(() => {
     async function fetchBackgrounds() {
       try {
         const fetchedBackgrounds = await BlobService.get('backgrounds');
+        console.log(fetchedBackgrounds);
         setBackgrounds([
           ...backgroundPresets.map((background) => background.value),
           ...fetchedBackgrounds,
@@ -120,7 +122,7 @@ const EventRoomForm = ({ onSubmit, submitText, updateEventRoom }) => {
       }
     }
     fetchBackgrounds();
-  }, [setBackgrounds]);
+  }, []);
 
   const updateMeetingTables = (newTables) => {
     setEventRoom({ meetingTables: newTables });

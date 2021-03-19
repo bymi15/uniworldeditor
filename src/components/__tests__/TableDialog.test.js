@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import TableDialog from '../TableDialog';
-import { mockMeetingTable } from '../../mocks/eventRoomMock';
+import { mockMeetingTable } from '../../mockData/eventRoomMock';
 
 describe('TableDialog test', () => {
   it('TableDialog should match snapshot', () => {
