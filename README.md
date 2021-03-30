@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### Setup Guide
+0. Make sure you have [NodeJS](https://nodejs.org/en/) installed
+1. Download or fork this repository
+2. Update the `src/config.js` file as follows:
+    - Change the `baseURL` value to the URL of the deployed Uniworld API Back-end
+    - Change the `platformURL` value to the URL of the deployed application
+      (e.g. `"https://<USERNAME>.github.io/<REPOSITORY_NAME>"`)
+3. Open the terminal and run `npm install` to install the dependencies
+
 ## Available Scripts
 
 In the project directory, you can run:
