@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
-import { UpdateLectureRoomPropType } from '../propTypes/LectureRoom';
-import { mockLectureRoomUpdate } from '../mockData/lectureRoomMock';
-import React from 'react';
-import moment from 'moment';
-import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from "prop-types";
+import { UpdateLectureRoomPropType } from "../propTypes/LectureRoom";
+import React from "react";
+import moment from "moment";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   Grid,
   Typography,
@@ -13,20 +12,14 @@ import {
   Button,
   TextField,
   CircularProgress,
-} from '@material-ui/core';
-import MomentUtils from '@date-io/moment';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDateTimePicker,
-} from '@material-ui/pickers';
-import AddIcon from '@material-ui/icons/Add';
-import FileUpload from '../components/FileUpload';
-import { useReducerState } from '../utils/customHooks';
-import BlobService from '../services/BlobService';
-import {
-  convertPdfToImages,
-  convertPreviewImage,
-} from '../utils/pdfToImageUtils';
+} from "@material-ui/core";
+import MomentUtils from "@date-io/moment";
+import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from "@material-ui/pickers";
+import AddIcon from "@material-ui/icons/Add";
+import FileUpload from "../components/FileUpload";
+import { useReducerState } from "../utils/customHooks";
+import BlobService from "../services/BlobService";
+import { convertPdfToImages, convertPreviewImage } from "../utils/pdfToImageUtils";
 
 const useStyles = makeStyles((theme) => ({
   lectureInfoPanel: {
@@ -37,22 +30,22 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   centerTableGrid: {
-    display: 'flex',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
   },
   createButton: {
-    '&:hover': {
+    "&:hover": {
       backgroundColor: theme.palette.success.dark,
     },
     backgroundColor: theme.palette.success.main,
-    color: '#fff',
+    color: "#fff",
   },
   addIcon: {
-    color: '#fff',
+    color: "#fff",
     marginRight: theme.spacing(2),
   },
   progressLoader: {
-    color: '#fff',
+    color: "#fff",
     marginRight: theme.spacing(2),
   },
   padTop: {
@@ -62,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(1),
   },
   flexDisplay: {
-    display: 'flex',
+    display: "flex",
   },
 }));
 
@@ -70,22 +63,20 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
   const classes = useStyles();
   const [isLoading, setLoading] = React.useState(false);
   const lectureRoomInitialState = {
-    title: '',
-    module: '',
-    lecturer: '',
+    title: "",
+    module: "",
+    lecturer: "",
     startTime: moment().toISOString(),
     endTime: moment().toISOString(),
-    firstSlideUrl: '',
+    firstSlideUrl: "",
     numSlides: 1,
   };
-  const [lectureRoom, setLectureRoom] = useReducerState(
-    lectureRoomInitialState
-  );
+  const [lectureRoom, setLectureRoom] = useReducerState(lectureRoomInitialState);
   const [file, setFile] = React.useState(null);
   const [previewImage, setPreviewImage] = React.useState(null);
 
   React.useEffect(() => {
-    if (updateLectureRoom !== undefined) {
+    if (updateLectureRoom) {
       setLectureRoom(updateLectureRoom);
     }
   }, [updateLectureRoom, setLectureRoom]);
@@ -103,7 +94,7 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
       setFile(e.target.files[0]);
       setPreviewImage(await convertPreviewImage(e.target.files[0]));
     } else {
-      alert('Please select a valid PDF document.');
+      alert("Please select a valid PDF document.");
     }
   };
 
@@ -124,7 +115,7 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
     let data = { ...lectureRoom };
     if (file) {
       const { numSlides, formData } = await convertPdfToImages(file);
-      const slide = await BlobService.upload(formData, 'slides');
+      const slide = await BlobService.upload(formData, "slides");
       data = { ...data, numSlides, firstSlideUrl: slide };
     }
     await onSubmit(data);
@@ -134,7 +125,7 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
 
   return (
     <Grid container spacing={2}>
-      {' '}
+      {" "}
       <Grid item md={12}>
         <Card className={classes.lectureInfoPanel}>
           <React.Fragment>
@@ -144,9 +135,10 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
                   <TextField
                     fullWidth
                     disabled={isLoading}
-                    name='title'
-                    label='Title'
-                    placeholder='Enter the lecture title'
+                    id="title"
+                    name="title"
+                    label="Title"
+                    placeholder="Enter the lecture title"
                     value={lectureRoom.title}
                     onChange={handleChange}
                     InputLabelProps={{
@@ -157,9 +149,10 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
                   <TextField
                     fullWidth
                     disabled={isLoading}
-                    name='module'
-                    label='Module'
-                    placeholder='Enter the module'
+                    id="module"
+                    name="module"
+                    label="Module"
+                    placeholder="Enter the module"
                     value={lectureRoom.module}
                     onChange={handleChange}
                     InputLabelProps={{
@@ -170,9 +163,10 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
                   <TextField
                     fullWidth
                     disabled={isLoading}
-                    name='lecturer'
-                    label='Lecturer'
-                    placeholder='Enter lecturer name'
+                    id="lecturer"
+                    name="lecturer"
+                    label="Lecturer"
+                    placeholder="Enter lecturer name"
                     value={lectureRoom.lecturer}
                     onChange={handleChange}
                     InputLabelProps={{
@@ -181,39 +175,39 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
                   />
                   <MuiPickersUtilsProvider utils={MomentUtils}>
                     <KeyboardDateTimePicker
+                      id="startTime"
                       fullWidth
                       disabled={isLoading}
                       disablePast
                       showTodayButton
-                      format='h:mm a - YYYY/MM/DD'
-                      margin='normal'
-                      id='startTime'
-                      label='Start Time'
+                      format="h:mm a - YYYY/MM/DD"
+                      margin="normal"
+                      label="Start Time"
                       value={lectureRoom.startTime}
                       onChange={(val) => {
                         handleDateChange(val, true);
                       }}
                       KeyboardButtonProps={{
-                        'aria-label': 'change start time',
+                        "aria-label": "change start time",
                       }}
                     />
                   </MuiPickersUtilsProvider>
                   <MuiPickersUtilsProvider utils={MomentUtils}>
                     <KeyboardDateTimePicker
+                      id="endTime"
                       fullWidth
                       disabled={isLoading}
                       disablePast
                       showTodayButton
-                      format='h:mm a - YYYY/MM/DD'
-                      margin='normal'
-                      id='endTime'
-                      label='End Time'
+                      format="h:mm a - YYYY/MM/DD"
+                      margin="normal"
+                      label="End Time"
                       value={lectureRoom.endTime}
                       onChange={(val) => {
                         handleDateChange(val, false);
                       }}
                       KeyboardButtonProps={{
-                        'aria-label': 'change end time',
+                        "aria-label": "change end time",
                       }}
                     />
                   </MuiPickersUtilsProvider>
@@ -223,10 +217,10 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
                       fullWidth
                       className={classes.padRight}
                       disabled={isLoading}
-                      name='firstSlideurl'
-                      label='Lecture Slides'
-                      placeholder='Upload lecture slides in a PDF format'
-                      value={file ? file.name : lectureRoom.firstSlideUrl || ''}
+                      name="firstSlideurl"
+                      label="Lecture Slides"
+                      placeholder="Upload lecture slides in a PDF format"
+                      value={file ? file.name : lectureRoom.firstSlideUrl || ""}
                       onChange={() => {}}
                       InputLabelProps={{
                         shrink: true,
@@ -236,24 +230,25 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
                       }}
                     />
                     <FileUpload
-                      name='lectureSlideUpload'
+                      id="lectureSlideUpload"
+                      name="lectureSlideUpload"
                       onChange={handleUploadLecturePdf}
-                      width='120px'
-                      accept='application/pdf'
+                      width="120px"
+                      accept="application/pdf"
                     >
                       Upload
                     </FileUpload>
                   </div>
                 </Grid>
                 <Grid item md={6} xs={12}>
-                  <Typography variant='subtitle2'>Slide Preview</Typography>
+                  <Typography variant="subtitle2">Slide Preview</Typography>
                   <img
-                    width='100%'
-                    alt='Slide Preview'
+                    width="100%"
+                    alt="Slide Preview"
                     src={
                       previewImage ||
                       lectureRoom.firstSlideUrl ||
-                      'https://via.placeholder.com/700x500.png?text=Placeholder+Slide'
+                      "https://via.placeholder.com/700x500.png?text=Placeholder+Slide"
                     }
                   />
                 </Grid>
@@ -261,18 +256,16 @@ const LectureRoomForm = ({ onSubmit, submitText, updateLectureRoom }) => {
             </CardContent>
             <CardActions>
               <Button
+                id="submitButton"
                 className={classes.createButton}
-                color='primary'
-                variant='outlined'
-                size='large'
+                color="primary"
+                variant="outlined"
+                size="large"
                 onClick={handleClickSubmit}
                 disabled={isLoading}
               >
                 {isLoading ? (
-                  <CircularProgress
-                    className={classes.progressLoader}
-                    size={20}
-                  />
+                  <CircularProgress className={classes.progressLoader} size={20} />
                 ) : (
                   <AddIcon className={classes.addIcon} />
                 )}
@@ -293,7 +286,7 @@ LectureRoomForm.propTypes = {
 };
 
 LectureRoomForm.defaultProps = {
-  updateLectureRoom: mockLectureRoomUpdate,
+  updateLectureRoom: undefined,
 };
 
 export default LectureRoomForm;

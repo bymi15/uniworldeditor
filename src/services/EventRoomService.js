@@ -12,7 +12,6 @@ class EventRoomService {
   }
 
   async create(data) {
-    // return new Promise((resolve) => setTimeout(resolve, 5000));
     return (await axiosConfig.post(this.url, data)).data;
   }
 

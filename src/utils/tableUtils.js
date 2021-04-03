@@ -26,6 +26,8 @@ const isEdge = (row, col) =>
   (row === 0 && col === 1) ||
   (row === 1 && col === 0);
 
+// Returns -1 if table is not present in row,col for tables array
+// Otherwise returns the table index of the table in row,col
 const getTableIndex = (row, col, tables) => {
   for (let i = 0; i < tables.length; i++) {
     // convert (-4 to 4 range) coordinates into (0 to 8 range) coordinates

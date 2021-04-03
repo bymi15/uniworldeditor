@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TableDialog test TableDialog should match snapshot 1`] = `
+exports[`TableDialog test should match snapshot 1`] = `
 <WithStyles(ForwardRef(Dialog))
   aria-labelledby="form-dialog-title"
+  id="dialog"
   onClose={[Function]}
   open={false}
 >
@@ -21,6 +22,7 @@ exports[`TableDialog test TableDialog should match snapshot 1`] = `
       }
       autoFocus={true}
       fullWidth={true}
+      id="meetingTitle"
       label="Meeting Title"
       margin="dense"
       name="title"
@@ -43,6 +45,7 @@ exports[`TableDialog test TableDialog should match snapshot 1`] = `
       </WithStyles(ForwardRef(Typography))>
       <ForwardRef(RadioGroup)
         aria-label="type"
+        id="tableType"
         name="type"
         onChange={[Function]}
         row={true}
@@ -75,6 +78,7 @@ exports[`TableDialog test TableDialog should match snapshot 1`] = `
         }
       }
       fullWidth={true}
+      id="zoomUrl"
       label="Zoom URL"
       margin="dense"
       name="zoomUrl"
@@ -99,7 +103,7 @@ exports[`TableDialog test TableDialog should match snapshot 1`] = `
           disableClearable={true}
           fullWidth={true}
           getOptionLabel={[Function]}
-          loading={false}
+          id="selectLogo"
           noOptionsText="No options. Please upload a logo."
           onChange={[Function]}
           options={Array []}
@@ -109,6 +113,7 @@ exports[`TableDialog test TableDialog should match snapshot 1`] = `
         />
         <FileUpload
           accept="image/*"
+          id="uploadLogo"
           name="uploadLogo"
           onChange={[Function]}
         >
@@ -120,12 +125,14 @@ exports[`TableDialog test TableDialog should match snapshot 1`] = `
   <WithStyles(ForwardRef(DialogActions))>
     <WithStyles(ForwardRef(Button))
       color="primary"
+      id="closeButton"
       onClick={[Function]}
     >
       Cancel
     </WithStyles(ForwardRef(Button))>
     <WithStyles(ForwardRef(Button))
       color="primary"
+      id="submitButton"
       onClick={[Function]}
     >
       Save Meeting Table

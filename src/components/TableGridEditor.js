@@ -1,45 +1,39 @@
-import PropTypes from 'prop-types';
-import { MeetingTablePropType } from '../propTypes/eventRoom';
-import { mockMeetingTable } from '../mockData/eventRoomMock';
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Button, Avatar } from '@material-ui/core';
-import {
-  isEdge,
-  getTableIndex,
-  toTablePos,
-  getTableImage,
-} from '../utils/tableUtils';
-import TableDialog from './TableDialog';
-import { useReducerState } from '../utils/customHooks';
+import PropTypes from "prop-types";
+import { MeetingTablePropType } from "../propTypes/EventRoom";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button, Avatar } from "@material-ui/core";
+import { isEdge, getTableIndex, toTablePos, getTableImage } from "../utils/tableUtils";
+import TableDialog from "./TableDialog";
+import { useReducerState } from "../utils/customHooks";
 
 const useStyles = makeStyles((theme) => ({
   gridContainer: {
-    display: 'grid',
-    gridGap: '5px',
-    gridAutoFlow: 'row',
-    gridTemplateColumns: 'repeat(9, 65px)',
-    gridTemplateRows: 'repeat(9, 65px)',
-    [theme.breakpoints.down('md')]: {
-      gridTemplateColumns: 'repeat(9, 45px)',
-      gridTemplateRows: 'repeat(9, 45px)',
+    display: "grid",
+    gridGap: "5px",
+    gridAutoFlow: "row",
+    gridTemplateColumns: "repeat(9, 65px)",
+    gridTemplateRows: "repeat(9, 65px)",
+    [theme.breakpoints.down("md")]: {
+      gridTemplateColumns: "repeat(9, 45px)",
+      gridTemplateRows: "repeat(9, 45px)",
     },
-    [theme.breakpoints.down('xs')]: {
-      gridTemplateColumns: 'repeat(9, 36px)',
-      gridTemplateRows: 'repeat(9, 36px)',
+    [theme.breakpoints.down("xs")]: {
+      gridTemplateColumns: "repeat(9, 36px)",
+      gridTemplateRows: "repeat(9, 36px)",
     },
   },
   gridItem: {
-    display: 'flex',
-    textAlign: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: '36px',
+    display: "flex",
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: "36px",
   },
   gridItemFill: {
-    background: '#ccc',
-    '&:hover': {
-      background: '#aaa',
+    background: "#ccc",
+    "&:hover": {
+      background: "#aaa",
     },
   },
 }));
@@ -62,11 +56,11 @@ const TableGridEditor = ({ tables, updateMeetingTables }) => {
   const submitDialog = (table) => {
     table = { ...table, posX: dialog.posX, posY: dialog.posY };
     setDialog(dialogInitialState);
-    updateMeetingTables([...(tables || {}), table]);
+    updateMeetingTables([...tables, table]);
   };
 
   const submitEditDialog = (table) => {
-    const newTables = [...(tables || {})];
+    const newTables = [...tables];
     newTables[editDialog.index] = table;
     setEditDialog(editDialogInitialState);
     updateMeetingTables(newTables);
@@ -77,7 +71,7 @@ const TableGridEditor = ({ tables, updateMeetingTables }) => {
   };
 
   const addTable = (posX, posY) => {
-    console.log(posX + ',' + posY);
+    console.log(posX + "," + posY);
     setDialog({
       open: true,
       posX: posX,
@@ -95,6 +89,7 @@ const TableGridEditor = ({ tables, updateMeetingTables }) => {
         } else if (tableIndex !== -1) {
           gridItems.push(
             <Button
+              id={`gridEditButton${row}-${col}`}
               className={`${classes.gridItem} ${classes.gridItemFill}`}
               onClick={() => editTable(tableIndex)}
             >
@@ -104,6 +99,7 @@ const TableGridEditor = ({ tables, updateMeetingTables }) => {
         } else {
           gridItems.push(
             <Button
+              id={`gridAddButton${row}-${col}`}
               className={`${classes.gridItem} ${classes.gridItemFill}`}
               onClick={() => addTable(toTablePos(row), toTablePos(col))}
             >
@@ -119,12 +115,14 @@ const TableGridEditor = ({ tables, updateMeetingTables }) => {
   return (
     <React.Fragment>
       <TableDialog
+        id="editDialog"
         open={editDialog.open}
         onClose={() => setEditDialog({ open: false })}
         onSubmit={submitEditDialog}
         updateTable={editDialog.table}
       />
       <TableDialog
+        id="tableDialog"
         open={dialog.open}
         onClose={() => setDialog({ open: false })}
         onSubmit={submitDialog}
