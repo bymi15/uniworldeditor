@@ -21,7 +21,7 @@ const CreateLectureRoom = (props) => {
     type: "success",
   });
 
-  const showAlert = (msg, type = "error") => {
+  const showAlert = (msg, type) => {
     setAlert({ open: true, message: msg, type: type });
   };
 

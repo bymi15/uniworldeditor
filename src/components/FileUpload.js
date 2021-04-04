@@ -1,30 +1,30 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import PublishIcon from '@material-ui/icons/Publish';
+import PropTypes from "prop-types";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import PublishIcon from "@material-ui/icons/Publish";
 
 const useStyles = makeStyles((theme) => ({
   fileUpload: {
-    width: '0.1px',
-    height: '0.1px',
+    width: "0.1px",
+    height: "0.1px",
     opacity: 0,
-    overflow: 'hidden',
-    position: 'absolute',
+    overflow: "hidden",
+    position: "absolute",
     zIndex: -1,
   },
   fileUploadLabel: {
-    '&:focus': {
-      outline: '1px dotted #000',
+    "&:focus": {
+      outline: "1px dotted #000",
     },
-    fontSize: '1rem',
+    fontSize: "1rem",
     fontWeight: 700,
-    color: '#fff',
+    color: "#fff",
     backgroundColor: theme.palette.info.main,
-    display: 'inline-block',
+    display: "inline-block",
     padding: theme.spacing(1),
-    cursor: 'pointer',
-    width: '180px',
-    paddingTop: '14px',
+    cursor: "pointer",
+    width: "180px",
+    paddingTop: "14px",
   },
 }));
 
@@ -33,19 +33,15 @@ const FileUpload = ({ name, onChange, width, children, accept }) => {
   return (
     <React.Fragment>
       <input
-        type='file'
+        type="file"
         id={name}
         name={name}
         className={classes.fileUpload}
         onChange={onChange}
         accept={accept}
       />
-      <label
-        for={name}
-        className={classes.fileUploadLabel}
-        style={width && { width: width }}
-      >
-        <PublishIcon fontSize='small' style={{ paddingTop: '4px' }} />
+      <label htmlFor={name} className={classes.fileUploadLabel} style={width && { width: width }}>
+        <PublishIcon fontSize="small" style={{ paddingTop: "4px" }} />
         {children}
       </label>
     </React.Fragment>

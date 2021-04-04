@@ -21,9 +21,6 @@ describe("EventRoomForm test", () => {
     meetingTables: [],
   };
   const setEventRoom = jest.fn();
-  const mockUseEffect = () => {
-    jest.spyOn(React, "useEffect").mockImplementation((f) => f());
-  };
 
   const flushPromises = () => new Promise(setImmediate);
   beforeEach(() => {
@@ -54,13 +51,11 @@ describe("EventRoomForm test", () => {
   });
 
   it("should fetch backgrounds from blob service on load", () => {
-    mockUseEffect();
     shallow(<EventRoomForm onSubmit={() => {}} submitText="mockText" />);
     expect(BlobService.get).toBeCalledWith("backgrounds");
   });
 
   it("should set eventRoom if updateEventRoom prop exists", () => {
-    mockUseEffect();
     shallow(
       <EventRoomForm
         onSubmit={() => {}}
@@ -72,7 +67,6 @@ describe("EventRoomForm test", () => {
   });
 
   it("should not set eventRoom if updateEventRoom prop does not exists", () => {
-    mockUseEffect();
     shallow(<EventRoomForm onSubmit={() => {}} submitText="mockText" />);
     expect(setEventRoom).not.toBeCalledWith(mockEventRoomUpdate);
   });
@@ -114,7 +108,7 @@ describe("EventRoomForm test", () => {
 
   it("should correctly handle upload background", async () => {
     BlobService.upload.mockImplementationOnce(() => Promise.resolve("mockBackground"));
-    mockUseEffect();
+
     const component = shallow(<EventRoomForm onSubmit={() => {}} submitText="mockText" />);
     const mockEvent = { target: { files: [{ name: "mockImage.jpg" }] }, preventDefault: () => {} };
     component.find("#backgroundUpload").first().simulate("change", mockEvent);

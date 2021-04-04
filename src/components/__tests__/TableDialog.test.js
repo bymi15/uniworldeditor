@@ -20,9 +20,6 @@ describe("TableDialog test", () => {
     logoUrl: "",
   };
   const setTable = jest.fn();
-  const mockUseEffect = () => {
-    jest.spyOn(React, "useEffect").mockImplementation((f) => f());
-  };
 
   const flushPromises = () => new Promise(setImmediate);
   beforeEach(() => {
@@ -43,7 +40,6 @@ describe("TableDialog test", () => {
   });
 
   it("should set table if updateTable prop exists", () => {
-    mockUseEffect();
     shallow(
       <TableDialog
         open={false}
@@ -56,13 +52,11 @@ describe("TableDialog test", () => {
   });
 
   it("should not set lectureRoom if updateLectureRoom prop is undefined", () => {
-    mockUseEffect();
     shallow(<TableDialog open={false} onClose={() => {}} onSubmit={() => {}} />);
     expect(setTable).not.toBeCalled();
   });
 
   it("should fetch logos from blob service on load", async () => {
-    mockUseEffect();
     shallow(<TableDialog open={false} onClose={() => {}} onSubmit={() => {}} />);
     await flushPromises();
     expect(BlobService.get).toBeCalledWith("logos");
@@ -70,7 +64,6 @@ describe("TableDialog test", () => {
 
   it("should correctly set table logoUrl to fetched logo", async () => {
     BlobService.get.mockImplementationOnce(() => Promise.resolve(["mockLogoUrl"]));
-    mockUseEffect();
     shallow(<TableDialog open={false} onClose={() => {}} onSubmit={() => {}} />);
     await flushPromises();
     expect(BlobService.get).toBeCalledWith("logos");

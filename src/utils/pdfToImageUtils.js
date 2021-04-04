@@ -11,9 +11,12 @@ const getCanvasBlobAsync = (canvas) => {
 const readFileData = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload = (e) => {
+    // reader.onload = (e) => {
+    //   resolve(e.target.result);
+    // };
+    reader.addEventListener("load", (e) => {
       resolve(e.target.result);
-    };
+    });
     reader.onerror = (err) => {
       reject(err);
     };

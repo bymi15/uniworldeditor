@@ -29,9 +29,6 @@ describe("LectureRoomForm test", () => {
     numSlides: 1,
   };
   const setLectureRoom = jest.fn();
-  const mockUseEffect = () => {
-    jest.spyOn(React, "useEffect").mockImplementation((f) => f());
-  };
   const flushPromises = () => new Promise(setImmediate);
 
   beforeAll(() => {
@@ -66,7 +63,6 @@ describe("LectureRoomForm test", () => {
   });
 
   it("should set lectureRoom if updateLectureRoom prop exists", () => {
-    mockUseEffect();
     shallow(
       <LectureRoomForm
         onSubmit={() => {}}
@@ -78,7 +74,6 @@ describe("LectureRoomForm test", () => {
   });
 
   it("should not set lectureRoom if updateLectureRoom prop is undefined", () => {
-    mockUseEffect();
     shallow(<LectureRoomForm onSubmit={() => {}} submitText="mockText" />);
     expect(setLectureRoom).not.toBeCalled();
   });
@@ -119,7 +114,6 @@ describe("LectureRoomForm test", () => {
   });
 
   it("should correctly handle upload lecture slide", async () => {
-    mockUseEffect();
     const component = shallow(<LectureRoomForm onSubmit={() => {}} submitText="mockText" />);
     const mockEvent = { target: { files: [{ name: "mockSlide.pdf" }] }, preventDefault: () => {} };
     component.find("#lectureSlideUpload").first().simulate("change", mockEvent);
@@ -128,7 +122,6 @@ describe("LectureRoomForm test", () => {
   });
 
   it("should alert user if invalid (non-pdf) file is uploaded", async () => {
-    mockUseEffect();
     const component = shallow(<LectureRoomForm onSubmit={() => {}} submitText="mockText" />);
     const mockEvent = {
       target: { files: [{ name: "invalidFile.jpg" }] },

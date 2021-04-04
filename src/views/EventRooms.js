@@ -71,7 +71,7 @@ const EventRooms = (props) => {
     type: "success",
   });
 
-  const showAlert = (msg, type = "error") => {
+  const showAlert = (msg, type) => {
     setAlert({ open: true, message: msg, type: type });
   };
 
@@ -84,7 +84,7 @@ const EventRooms = (props) => {
       showAlert("Successfully created event room.", "success");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location.state]);
+  }, [props.location]);
 
   React.useEffect(() => {
     async function fetchEventRooms() {
@@ -106,7 +106,7 @@ const EventRooms = (props) => {
       setLoading(false);
     }
     fetchEventRooms();
-  }, [props]);
+  }, [props.match.params.id]);
 
   const handleClickEventRoom = (index) => {
     setCurrentEventRoom(index);
@@ -170,6 +170,7 @@ const EventRooms = (props) => {
               {eventRooms.length > 0 &&
                 eventRooms.map((eventRoom, index) => (
                   <ListItem
+                    id={`listItem${index}`}
                     key={eventRoom._id}
                     button
                     selected={currentEventRoom === index}
@@ -196,12 +197,9 @@ const EventRooms = (props) => {
                         "MMMM DD YYYY, h:mm a"
                       )}
                     </Typography>
-                    <Typography variant="h5" component="h2">
+                    <Typography id="currentEventRoomTitle" variant="h5" component="h2">
                       {eventRooms[currentEventRoom].title}
                     </Typography>
-                    {/* <Typography color="textSecondary">
-                      Hosted by {eventRooms[currentEventRoom].host}
-                    </Typography> */}
                     <div className={classes.divider} />
                     <Grid container>
                       <Grid item md={9} xs={12} className={classes.centerTableGrid}>
@@ -232,6 +230,7 @@ const EventRooms = (props) => {
                           </Typography>
                         </a>
                         <Button
+                          aria-label="copyUrl"
                           className={classes.mt}
                           variant="contained"
                           color="primary"
@@ -248,6 +247,7 @@ const EventRooms = (props) => {
                   </CardContent>
                   <CardActions>
                     <Button
+                      aria-label="editEventRoomButton"
                       color="primary"
                       variant="outlined"
                       onClick={() => {
@@ -257,6 +257,7 @@ const EventRooms = (props) => {
                       Edit
                     </Button>
                     <Button
+                      aria-label="removeEventRoomButton"
                       color="secondary"
                       variant="outlined"
                       onClick={() => {
@@ -268,7 +269,7 @@ const EventRooms = (props) => {
                   </CardActions>
                 </React.Fragment>
               ) : (
-                <Typography color="textSecondary" gutterBottom>
+                <Typography id="createEventRoomButton" color="textSecondary" gutterBottom>
                   Create an event room
                 </Typography>
               )}

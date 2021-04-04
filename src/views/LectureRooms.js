@@ -70,7 +70,7 @@ const LectureRooms = (props) => {
     type: "success",
   });
 
-  const showAlert = (msg, type = "error") => {
+  const showAlert = (msg, type) => {
     setAlert({ open: true, message: msg, type: type });
   };
 
@@ -83,7 +83,7 @@ const LectureRooms = (props) => {
       showAlert("Successfully created lecture room.", "success");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.location.state]);
+  }, [props.location]);
 
   React.useEffect(() => {
     async function fetchLectureRooms() {
@@ -175,6 +175,7 @@ const LectureRooms = (props) => {
               {lectureRooms.length > 0 &&
                 lectureRooms.map((lectureRoom, index) => (
                   <ListItem
+                    id={`listItem${index}`}
                     key={lectureRoom._id}
                     button
                     selected={currentLectureRoom === index}
@@ -200,7 +201,7 @@ const LectureRooms = (props) => {
                     <Typography color="textSecondary" gutterBottom>
                       {lectureRooms[currentLectureRoom].module}
                     </Typography>
-                    <Typography variant="h5" component="h2">
+                    <Typography id="currentLectureRoomTitle" variant="h5" component="h2">
                       {lectureRooms[currentLectureRoom].title}
                     </Typography>
                   </CardContent>
@@ -217,18 +218,18 @@ const LectureRooms = (props) => {
                       <Typography variant="body2" gutterBottom>
                         {lectureRooms[currentLectureRoom].lecturer}
                       </Typography>
-                      <div classname={classes.divider} />
+                      <div className={classes.divider} />
                       <Typography variant="subtitle2">Time:</Typography>
                       <Typography variant="body2" gutterBottom>
                         {moment(lectureRooms[currentLectureRoom].startTime).format("h:mm a")} -{" "}
                         {moment(lectureRooms[currentLectureRoom].endTime).format("h:mm a")}
                       </Typography>
-                      <div classname={classes.divider} />
+                      <div className={classes.divider} />
                       <Typography variant="subtitle2">Date:</Typography>
                       <Typography variant="body2" gutterBottom>
                         {moment(lectureRooms[currentLectureRoom].startTime).format("MMMM DD YYYY")}
                       </Typography>
-                      <div classname={classes.divider} />
+                      <div className={classes.divider} />
                       <Typography variant="subtitle2">Lecture Room URL: </Typography>
                       <a
                         href={`${platformURL}?lid=${lectureRooms[currentLectureRoom]._id}`}
@@ -240,6 +241,7 @@ const LectureRooms = (props) => {
                         </Typography>
                       </a>
                       <Button
+                        aria-label="copyUrl"
                         className={classes.mt}
                         variant="contained"
                         color="primary"
@@ -255,6 +257,7 @@ const LectureRooms = (props) => {
                   </Grid>
                   <CardActions>
                     <Button
+                      aria-label="editLectureRoomButton"
                       color="primary"
                       variant="outlined"
                       onClick={() => {
@@ -264,6 +267,7 @@ const LectureRooms = (props) => {
                       Edit
                     </Button>
                     <Button
+                      aria-label="removeLectureRoomButton"
                       color="secondary"
                       variant="outlined"
                       onClick={() => {
@@ -275,7 +279,7 @@ const LectureRooms = (props) => {
                   </CardActions>
                 </React.Fragment>
               ) : (
-                <Typography color="textSecondary" gutterBottom>
+                <Typography id="createLectureRoomButton" color="textSecondary" gutterBottom>
                   Create lecture room
                 </Typography>
               )}
